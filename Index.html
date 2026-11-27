@@ -1,0 +1,2721 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Pui's CX Roster</title>
+  <style>
+    :root {
+      /* Cathay Pacific App 2026 視覺色系 */
+      --bg-page: #F5F7F6;
+      --bg-header-tint: #CFE2DF;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #EDF2F1;
+      --cx-jade: #006564;
+      --cx-jade-deep: #004746;
+      --cx-jade-soft: #E3F1EF;
+      --cx-mint-border: #B6D6D2;
+      --cx-gold: #A88238;
+      --cx-gold-bg: #FBF5E8;
+      --cx-sby: #D96B27;
+      --cx-sby-bg: #FDF1E8;
+      --cx-trg: #3B6998;
+      --cx-trg-bg: #EDF4FA;
+      --today-accent: #D9383A;
+      --text-primary: #1A2424;
+      --text-secondary: #5E6E6D;
+      --border-hairline: #E2E8E7;
+      --shadow-card: 0 4px 16px rgba(0, 62, 61, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
+
+      --cal-cell-min-h: 82px;
+      --cal-num-size: 13px;
+      --cal-badge-size: 11px;
+      --cal-sub-size: 9.5px;
+    }
+
+    [data-cal-size="lg"] {
+      --cal-cell-min-h: 92px;
+      --cal-num-size: 14.5px;
+      --cal-badge-size: 12.5px;
+      --cal-sub-size: 10.5px;
+    }
+
+    [data-cal-size="xl"] {
+      --cal-cell-min-h: 104px;
+      --cal-num-size: 16px;
+      --cal-badge-size: 14px;
+      --cal-sub-size: 11.5px;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #0B1212;
+      --bg-header-tint: #132525;
+      --bg-card: #142020;
+      --bg-subtle: #1B2C2C;
+      --cx-jade: #28ACA9;
+      --cx-jade-deep: #005A58;
+      --cx-jade-soft: #163635;
+      --cx-mint-border: #255755;
+      --cx-gold: #D9B650;
+      --cx-gold-bg: #292212;
+      --cx-sby: #F08A4B;
+      --cx-sby-bg: #2E1D12;
+      --cx-trg: #6BA3D6;
+      --cx-trg-bg: #152536;
+      --today-accent: #FF5E62;
+      --text-primary: #EFF4F4;
+      --text-secondary: #92A6A5;
+      --border-hairline: #213434;
+      --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang HK", "Helvetica Neue", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      transition: background-color 0.25s ease, color 0.25s ease;
+      padding-bottom: 50px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 復刻 CX App 柔和薄荷灰綠頂部區塊 */
+    .cx-top-banner {
+      background: linear-gradient(180deg, var(--bg-header-tint) 0%, var(--bg-page) 100%);
+      padding: 16px 18px 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cx-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .cx-greeting h1 {
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: var(--text-primary);
+    }
+
+    .cx-greeting-sub {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 3px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .cx-brushwing-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--cx-jade);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .top-icon-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .cx-circle-btn {
+      height: 34px;
+      padding: 0 12px;
+      border-radius: 99px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .cx-circle-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* CX App 分段切換膠囊 */
+    .cx-segment-wrap {
+      display: flex;
+      background: rgba(0, 71, 70, 0.08);
+      padding: 3px;
+      border-radius: 99px;
+      margin-bottom: 6px;
+    }
+
+    [data-theme="dark"] .cx-segment-wrap {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .cx-segment-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      padding: 7px 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cx-segment-btn.active {
+      background: var(--bg-card);
+      color: var(--cx-jade);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 6px 16px 24px;
+    }
+
+    /* 復刻 CX App 深翡翠綠會員卡片（Next Flight Hero Card） */
+    .cx-member-card {
+      background: linear-gradient(135deg, #006564 0%, #004B4A 60%, #003837 100%);
+      color: #FFFFFF;
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 10px 24px rgba(0, 75, 74, 0.22);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cx-member-card::after {
+      content: "";
+      position: absolute;
+      right: -30px;
+      top: -30px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .card-status-pill {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      color: #A8E0DC;
+      text-transform: uppercase;
+    }
+
+    .card-ac-text {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+    }
+
+    .card-route-title {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+      color: #FFFFFF;
+      margin: 2px 0 4px;
+    }
+
+    .card-countdown-sub {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    /* CX App 纖細進度條 */
+    .cx-progress-track {
+      background: rgba(255, 255, 255, 0.2);
+      height: 5px;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .cx-progress-fill {
+      background: #7CE0DA;
+      height: 100%;
+      width: 0%;
+      border-radius: 99px;
+      transition: width 0.5s ease;
+    }
+
+    .card-times-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .card-footer-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .card-ghost-btn {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+    }
+
+    .card-ghost-btn:active {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    /* CX App 數據摘要白底卡片 */
+    .cx-stats-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: 14px;
+      padding: 14px 10px;
+      margin-bottom: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      box-shadow: var(--shadow-card);
+    }
+
+    .cx-stat-col {
+      text-align: center;
+      position: relative;
+    }
+
+    .cx-stat-col:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      background: var(--border-hairline);
+    }
+
+    .cx-stat-num {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.3px;
+    }
+
+    .cx-stat-lbl {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 3px;
+    }
+
+    /* 精簡雙按鈕（匯出圖片 / 匯出日曆） */
+    .cx-dual-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .cx-action-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-primary);
+      border-radius: 12px;
+      padding: 11px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.12s ease;
+    }
+
+    .cx-action-pill.primary {
+      background: var(--cx-jade);
+      color: #FFFFFF;
+      border-color: var(--cx-jade);
+    }
+
+    .cx-action-pill:active {
+      transform: scale(0.98);
+    }
+
+    /* 月曆主卡片 */
+    .calendar-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: 16px;
+      padding: 14px 10px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .roster-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 0 2px;
+      gap: 6px;
+    }
+
+    /* 上月 / 下月 切換器 */
+    .month-nav-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .month-nav-btn {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-hairline);
+      color: var(--cx-jade);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .month-nav-btn:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    .roster-month-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.2px;
+      min-width: 96px;
+      text-align: center;
+    }
+
+    .font-ctrl-group {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      background: var(--bg-subtle);
+      padding: 2px 4px;
+      border-radius: 8px;
+    }
+
+    .font-ctrl-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-primary);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .font-size-tag {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 0 3px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .cal-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 10px;
+      font-size: 10.5px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      padding: 0 4px;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+
+    .cal-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .cal-weekdays div:first-child,
+    .cal-weekdays div:last-child {
+      color: var(--cx-gold);
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+
+    .cal-cell {
+      min-height: var(--cal-cell-min-h);
+      background: var(--bg-page);
+      border: 1px solid var(--border-hairline);
+      border-radius: 10px;
+      padding: 5px 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.12s ease, min-height 0.15s ease;
+    }
+
+    .cal-cell:active {
+      transform: scale(0.96);
+    }
+
+    .cal-cell.empty {
+      background: transparent;
+      border: none;
+      cursor: default;
+    }
+
+    .cal-cell.prev-month-day {
+      opacity: 0.8;
+      border-style: dashed;
+    }
+
+    /* 執勤起飛日：深翡翠綠 */
+    .cal-cell.work-flight {
+      background: var(--cx-jade);
+      color: #FFFFFF;
+      border-color: var(--cx-jade);
+    }
+
+    /* 跨日飛行 / 抵港日：柔和淺薄荷綠 */
+    .cal-cell.work-transit {
+      background: var(--cx-jade-soft);
+      color: var(--cx-jade-deep);
+      border: 1px solid var(--cx-mint-border);
+    }
+
+    [data-theme="dark"] .cal-cell.work-transit {
+      color: #9EE2DF;
+    }
+
+    /* 外站停留：香檳金 */
+    .cal-cell.work-layover {
+      background: var(--cx-gold-bg);
+      border: 1px solid rgba(168, 130, 56, 0.45);
+      color: var(--text-primary);
+    }
+
+    /* 待命更 SBY：暖橙色 */
+    .cal-cell.work-standby {
+      background: var(--cx-sby-bg);
+      border: 1px solid rgba(217, 107, 39, 0.45);
+      color: var(--cx-sby);
+    }
+
+    /* 培訓/複訓/體檢 TRG/SEP/MED：靛藍色 */
+    .cal-cell.work-training {
+      background: var(--cx-trg-bg);
+      border: 1px solid rgba(59, 105, 152, 0.45);
+      color: var(--cx-trg);
+    }
+
+    /* G假 / 年假 / 休息 */
+    .cal-cell.day-off {
+      background: var(--bg-card);
+    }
+
+    .cal-cell.is-today {
+      outline: 2px solid var(--today-accent);
+      outline-offset: -1px;
+      z-index: 2;
+    }
+
+    .today-tag {
+      background: var(--today-accent);
+      color: #FFFFFF;
+      font-size: 7px;
+      font-weight: 700;
+      padding: 1px 3px;
+      border-radius: 3px;
+      line-height: 1.1;
+    }
+
+    .cal-day-num {
+      font-size: var(--cal-num-size);
+      font-weight: 600;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .cal-cell.work-flight .cal-day-num {
+      color: #F2D394;
+    }
+
+    .cal-badge {
+      font-size: var(--cal-badge-size);
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.15;
+      word-break: break-word;
+    }
+
+    .cal-sub {
+      font-size: var(--cal-sub-size);
+      font-weight: 500;
+      opacity: 0.88;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    /* 彈窗設計（CX App 潔淨白卡風格） */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 25, 25, 0.5);
+      backdrop-filter: blur(3px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 200;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-sheet {
+      background: var(--bg-card);
+      width: 100%;
+      max-width: 680px;
+      border-radius: 20px 20px 0 0;
+      padding: 20px 18px 32px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.18);
+      animation: slideUp 0.22s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(25px); opacity: 0.7; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .trip-banner {
+      background: var(--cx-jade-soft);
+      border-left: 3.5px solid var(--cx-jade);
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .trip-banner-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--cx-jade);
+    }
+
+    .trip-banner-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* 外站即時當地時鐘與最低休息時間卡片 */
+    .layover-live-box {
+      background: linear-gradient(135deg, #006564 0%, #004746 100%);
+      color: #FFFFFF;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .layover-live-item span {
+      display: block;
+      font-size: 10.5px;
+      color: #A8E0DC;
+      margin-bottom: 2px;
+    }
+
+    .layover-live-item strong {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .detail-step {
+      background: var(--bg-page);
+      border: 1px solid var(--border-hairline);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+
+    .detail-step.active-day {
+      border: 1.5px solid var(--cx-jade);
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .country-badge {
+      display: inline-block;
+      background: var(--cx-gold-bg);
+      color: var(--cx-gold);
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-top: 3px;
+    }
+
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .step-item span {
+      color: var(--text-secondary);
+      font-size: 10.5px;
+      display: block;
+      margin-bottom: 1px;
+    }
+
+    .info-section-card {
+      background: var(--bg-page);
+      border: 1px solid var(--border-hairline);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 10px;
+    }
+
+    .info-section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .wmo-tag {
+      font-size: 9.5px;
+      font-weight: 600;
+      background: var(--cx-jade-soft);
+      color: var(--cx-jade);
+      padding: 2px 6px;
+      border-radius: 5px;
+    }
+
+    .weather-strip {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      text-align: center;
+    }
+
+    .weather-day-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: 8px;
+      padding: 6px 2px;
+      font-size: 10px;
+    }
+
+    .weather-day-box strong {
+      display: block;
+      font-size: 10.5px;
+      color: var(--cx-jade);
+    }
+
+    .weather-pop {
+      font-size: 8.5px;
+      color: #2A85C6;
+      font-weight: 600;
+      margin-top: 1px;
+    }
+
+    .customs-group {
+      margin-bottom: 10px;
+    }
+
+    .customs-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .customs-group-header {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .customs-group-header.ban {
+      color: var(--today-accent);
+    }
+
+    .customs-group-header.allow {
+      color: var(--cx-jade);
+    }
+
+    .customs-bullets {
+      list-style: none;
+      padding-left: 6px;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .customs-search-links {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-hairline);
+    }
+
+    .customs-link-btn {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 7px 8px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      color: var(--cx-jade);
+      border: 1px solid var(--border-hairline);
+    }
+
+    .file-drop {
+      position: relative;
+      display: block;
+      width: 100%;
+      border: 1.5px dashed var(--cx-jade);
+      background: var(--cx-jade-soft);
+      border-radius: 12px;
+      padding: 16px 14px;
+      text-align: center;
+      margin-bottom: 12px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .file-drop input[type="file"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      font-size: 100px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 110px;
+      background: var(--bg-page);
+      color: var(--text-primary);
+      border: 1px solid var(--border-hairline);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 11.5px;
+      font-family: monospace;
+      margin-bottom: 10px;
+    }
+
+    .excel-preview-wrap {
+      max-height: 165px;
+      overflow: auto;
+      border: 1px solid var(--border-hairline);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      background: var(--bg-card);
+    }
+
+    .excel-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      font-family: monospace;
+    }
+
+    .excel-table th, .excel-table td {
+      border: 1px solid var(--border-hairline);
+      padding: 5px 6px;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .excel-table th {
+      background: var(--cx-jade);
+      color: #fff;
+      position: sticky;
+      top: 0;
+    }
+
+    .excel-table tr.auto-filled {
+      background: var(--cx-gold-bg);
+    }
+
+    .modal-btn-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #004B4A;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 99px;
+      font-size: 12.5px;
+      font-weight: 500;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+      z-index: 300;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<!-- CX App 柔和薄荷霧綠頂部區 -->
+<div class="cx-top-banner">
+  <div class="cx-top-bar">
+    <div class="cx-greeting">
+      <h1>Pui's CX Roster</h1>
+      <div class="cx-greeting-sub">
+        <span class="cx-brushwing-badge">CX</span>
+        <span id="rosterSubtitle">Dec 2026</span>
+      </div>
+    </div>
+    <div class="top-icon-actions">
+      <button class="cx-circle-btn" onclick="toggleTheme()" id="themeBtn">Night</button>
+      <button class="cx-circle-btn" onclick="openImportModal()" id="importTopBtn">Import</button>
+    </div>
+  </div>
+
+  <div class="cx-segment-wrap">
+    <button class="cx-segment-btn active" id="btnCrewMode" onclick="setViewMode('crew')">Crew View</button>
+    <button class="cx-segment-btn" id="btnFamilyMode" onclick="setViewMode('family')">Family View</button>
+  </div>
+</div>
+
+<div class="container">
+  <!-- CX App 深翡翠綠會員風主卡片 -->
+  <div class="cx-member-card" id="heroCard">
+    <div class="card-top-row">
+      <span class="card-status-pill" id="heroStatusTag">NEXT FLIGHT</span>
+      <span class="card-ac-text" id="heroAcType">--</span>
+    </div>
+    <div class="card-route-title" id="heroRoute">--</div>
+    <div class="card-countdown-sub" id="heroCountdown">--</div>
+    <div class="cx-progress-track">
+      <div class="cx-progress-fill" id="heroProgressBar"></div>
+    </div>
+    <div class="card-times-row">
+      <span id="heroLeftMeta">--</span>
+      <span id="heroRightMeta">--</span>
+    </div>
+    <div class="card-footer-links">
+      <button class="card-ghost-btn" onclick="refreshLiveProgress()" id="refreshBtn">Refresh Progress</button>
+      <a class="card-ghost-btn" id="heroRadarLink" href="https://www.flightradar24.com" target="_blank">Flightradar24 ↗</a>
+    </div>
+  </div>
+
+  <!-- CX App 三欄數據摘要 -->
+  <div class="cx-stats-card">
+    <div class="cx-stat-col">
+      <div class="cx-stat-num" id="statBlockHours">--</div>
+      <div class="cx-stat-lbl" id="statLabel1">Block Hours</div>
+    </div>
+    <div class="cx-stat-col">
+      <div class="cx-stat-num" id="statWorkDays">--</div>
+      <div class="cx-stat-lbl" id="statLabel2">Duty Days</div>
+    </div>
+    <div class="cx-stat-col">
+      <div class="cx-stat-num" id="statOffDays">--</div>
+      <div class="cx-stat-lbl" id="statLabel3">Off Days</div>
+    </div>
+  </div>
+
+  <!-- 精簡雙按鈕：匯出圖片 / 匯出日曆 -->
+  <div class="cx-dual-actions">
+    <button class="cx-action-pill primary" onclick="exportFamilyImage()" id="btnExportImg">匯出圖片</button>
+    <button class="cx-action-pill" onclick="exportICS(false)" id="btnExportIcs">匯出日曆</button>
+  </div>
+
+  <!-- 月曆卡片（含上月 / 下月切換） -->
+  <div class="calendar-wrapper" id="captureArea">
+    <div class="roster-header-bar">
+      <div class="month-nav-group">
+        <button class="month-nav-btn" id="prevMonthBtn" onclick="switchMonth(-1)">‹ 上月</button>
+        <div class="roster-month-title" id="listTitle">Dec 2026</div>
+        <button class="month-nav-btn" id="nextMonthBtn" onclick="switchMonth(1)">下月 ›</button>
+      </div>
+      <div class="font-ctrl-group" title="Adjust Calendar Font Size">
+        <button class="font-ctrl-btn" onclick="changeCalFontSize(-1)">A-</button>
+        <span class="font-size-tag" id="calFontSizeLabel">M</span>
+        <button class="font-ctrl-btn" onclick="changeCalFontSize(1)">A+</button>
+      </div>
+    </div>
+
+    <div class="cal-legend" id="calLegend"></div>
+    <div class="cal-weekdays" id="calWeekdays"></div>
+    <div class="cal-grid" id="calendarGrid"></div>
+  </div>
+</div>
+
+<!-- Day / Trip Detail Modal -->
+<div class="modal-backdrop" id="dayDetailModal" onclick="if(event.target===this) closeDayModal()">
+  <div class="modal-sheet">
+    <div class="modal-header">
+      <h3 style="font-size:16px; font-weight:600;" id="detailModalTitle">Duty Details</h3>
+      <button class="cx-circle-btn" onclick="closeDayModal()" id="closeDetailBtn">Close</button>
+    </div>
+    <div id="detailModalBody"></div>
+  </div>
+</div>
+
+<!-- Import Modal -->
+<div class="modal-backdrop" id="importModal" onclick="if(event.target===this) closeImportModal()">
+  <div class="modal-sheet">
+    <div class="modal-header">
+      <h3 style="font-size:16px; font-weight:600;" id="importModalTitle">Import CX Roster</h3>
+      <button class="cx-circle-btn" onclick="closeImportModal()" id="closeImportBtn">Close</button>
+    </div>
+
+    <div class="file-drop">
+      <div style="font-size:13px; font-weight:600; color:var(--cx-jade);" id="fileDropTitle">Select PDF / JPG / PNG / CSV</div>
+      <div style="font-size:11px; color:var(--text-secondary); margin-top:3px;" id="fileDropSub">Tap here to choose from Photos or Files</div>
+      <input type="file" id="fileInput" onchange="handleFileUpload(event)" />
+    </div>
+
+    <div style="font-size:12px; font-weight:600; margin-bottom:6px;" id="pasteLabel">Roster text (editable before update):</div>
+    <textarea id="rawTextInput" oninput="previewTableFromText()" placeholder="Paste CX roster lines..."></textarea>
+
+    <div style="font-size:11.5px; font-weight:600; margin-bottom:4px; color:var(--cx-jade);" id="tablePreviewLabel">Table Grid Validation (Excel Style):</div>
+    <div class="excel-preview-wrap" id="excelPreviewWrap"></div>
+
+    <div class="modal-btn-row">
+      <button class="cx-action-pill" style="flex:1;" onclick="loadSampleData()" id="demoBtn">Demo Sample</button>
+      <button class="cx-action-pill primary" style="flex:2;" onclick="parseAndRenderText()" id="applyBtn">Parse & Update</button>
+    </div>
+    <button class="cx-action-pill" style="width:100%; font-size:12px; color:var(--text-secondary);" onclick="exportICS(true)" id="btnClearIcs">下載日曆清除檔 (Clear Calendar .ics)</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">Done</div>
+
+<script>
+  const safeStorage = {
+    get(key) { try { return localStorage.getItem(key); } catch (e) { return null; } },
+    set(key, val) { try { localStorage.setItem(key, val); } catch (e) {} },
+    remove(key) { try { localStorage.removeItem(key); } catch (e) {} }
+  };
+
+  function setText(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  }
+
+  function setHtml(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = val;
+  }
+
+  const AIRCRAFT_MAP = {
+    "35G": "A350-900 (35G)",
+    "35J": "A350-1000 (35J)",
+    "77K": "B777-300ER (77K)",
+    "77A": "B777-300ER (77A)",
+    "77P": "B777-300 (77P)",
+    "33E": "A330-300 (33E)",
+    "33P": "A330-300 (33P)",
+    "33K": "A330-300 (33K)",
+    "33J": "A330-300 (33J)",
+    "32Q": "A321neo (32Q)",
+    "32N": "A321neo (32N)"
+  };
+
+  /* 常見國泰更表代號對照表 */
+  const DUTY_CODE_INFO = {
+    SBY:  { category: "STANDBY",  en: "Standby",        zh: "待命更",   descZh: "居家或機場待命，需保持電話暢通並隨時準備執勤。", descEn: "On standby duty; keep phone reachable for call-out." },
+    ASBY: { category: "STANDBY",  en: "Airport SBY",    zh: "機場待命", descZh: "需穿著制服於機場指定休息室待命。", descEn: "Airport standby in uniform at crew briefing area." },
+    HSBY: { category: "STANDBY",  en: "Home SBY",       zh: "居家待命", descZh: "留於香港住所待命，接獲通知後需於規定時間內抵達機場。", descEn: "Home standby in HKG; report within call-out window." },
+    TRG:  { category: "TRAINING", en: "Training",       zh: "培訓課程", descZh: "國泰城（Cathay City）地面訓練或服務培訓課程。", descEn: "Ground training session at Cathay City." },
+    SEP:  { category: "TRAINING", en: "Safety/SEP",     zh: "安全複訓", descZh: "年度緊急及安全設備複訓（Safety & Emergency Procedures）。", descEn: "Annual Safety & Emergency Procedures recurrent training." },
+    CRM:  { category: "TRAINING", en: "CRM Course",     zh: "CRM 培訓", descZh: "機組資源管理（Crew Resource Management）課程。", descEn: "Crew Resource Management training." },
+    SIM:  { category: "TRAINING", en: "Simulator",      zh: "模擬機",   descZh: "模擬飛行艙訓練或考核。", descEn: "Flight simulator session." },
+    MED:  { category: "TRAINING", en: "Medical",        zh: "航空體檢", descZh: "年度機組人員體格檢查或疫苗注射。", descEn: "Aviation medical checkup." },
+    G:    { category: "OFF",      en: "G Day (Off)",    zh: "G 假",     descZh: "受合約保障之法定休息日，身處香港基地。", descEn: "Guaranteed Day Off at HKG base." },
+    AL:   { category: "OFF",      en: "Annual Leave",   zh: "年假",     descZh: "已獲批之有薪年假。", descEn: "Approved Annual Leave." },
+    SL:   { category: "OFF",      en: "Sick Leave",     zh: "病假",     descZh: "病假休息日。", descEn: "Sick Leave." },
+    DO:   { category: "OFF",      en: "Day Off",        zh: "休息日",   descZh: "排班休息日，身處香港基地。", descEn: "Scheduled Day Off at HKG." },
+    OFF:  { category: "OFF",      en: "Off Duty",       zh: "休息日",   descZh: "無飛行執勤任務。", descEn: "Off duty day." }
+  };
+
+  const CUSTOMS_RULES = {
+    GB: {
+      countryZh: "英國", countryEn: "United Kingdom",
+      officialUrl: "https://www.gov.uk/bringing-goods-into-uk-personal-use",
+      banZh: ["非歐盟地區肉類及肉製品（包括機上剩餘三文治）", "奶類及乳製品", "蛋類及蛋製品", "未經許可植物及新鮮蔬果"],
+      allowZh: ["隨身液體（每瓶 ≤100ml，放入 1L 透明袋）", "免稅葡萄酒 ≤4 公升 / 烈酒 ≤1 公升", "個人自用藥物（建議備醫生處方）"],
+      banEn: ["Meat & meat products from outside EU/UK (incl. inflight sandwiches)", "Milk & dairy products", "Eggs & egg products", "Unlicensed plants & fresh produce"],
+      allowEn: ["Carry-on liquids (≤100ml per item in 1L clear bag)", "Duty-free wine ≤4L / spirits ≤1L", "Personal medication (with prescription)"]
+    },
+    US: {
+      countryZh: "美國", countryEn: "United States",
+      officialUrl: "https://www.cbp.gov/travel/international-visitors/know-before-you-visit/customs-duty-information",
+      banZh: ["新鮮水果及蔬菜", "肉類製品（肉乾、臘腸、火腿、肉鬆等）", "蛋類及未經申報動物產品", "未申報超過 US$10,000 現金"],
+      allowZh: ["隨身液體（TSA 3-1-1 規則，每瓶 ≤100ml）", "商業密封包裝餅乾及糖果（須申報）", "免稅酒類 ≤1 公升（21歲以上）"],
+      banEn: ["Fresh fruits & vegetables", "Meat products (jerky, sausages, ham)", "Eggs & undeclared animal products", "Undeclared cash >US$10,000"],
+      allowEn: ["Carry-on liquids (TSA 3-1-1, ≤100ml per item)", "Commercially sealed snacks/candy (declare)", "Duty-free alcohol ≤1L (age 21+)"]
+    },
+    AU: {
+      countryZh: "澳洲", countryEn: "Australia",
+      officialUrl: "https://www.abf.gov.au/entering-and-leaving-australia/can-you-bring-it-in",
+      banZh: ["蛋類及含蛋食品（如月餅、蛋黃酥）", "肉類、家禽及乳製品", "新鮮蔬果、種子、堅果及蜂蜜"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅酒類 ≤2.25 公升", "商業密封包裝茶葉及咖啡豆（須申報）"],
+      banEn: ["Eggs & egg-containing food (e.g. mooncakes)", "Meat, poultry & dairy products", "Fresh fruit/veg, seeds, nuts & honey"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free alcohol ≤2.25L", "Commercially packaged tea & coffee (declare)"]
+    },
+    NZ: {
+      countryZh: "紐西蘭", countryEn: "New Zealand",
+      officialUrl: "https://www.customs.govt.nz/personal/travel-to-and-from-nz/travelling-to-nz/",
+      banZh: ["所有新鮮蔬果、蜂蜜及蜂製品（嚴格禁止）", "肉類、蛋類及乳製品", "沾有泥土之戶外鞋履及器材"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅酒類 ≤4.5 公升葡萄酒/啤酒 及 3 瓶烈酒", "商業密封包裝零食（須於入境卡申報）"],
+      banEn: ["All fresh produce, honey & bee products (strictly prohibited)", "Meat, eggs & dairy products", "Outdoor gear/shoes with soil"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free wine/beer ≤4.5L & 3 bottles spirits", "Commercially sealed snacks (declare)"]
+    },
+    CA: {
+      countryZh: "加拿大", countryEn: "Canada",
+      officialUrl: "https://www.cbsa-asfc.gc.ca/travel-voyage/declare-eng.html",
+      banZh: ["肉類及家禽製品", "蛋類及乳製品", "新鮮水果、蔬菜及植物"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅葡萄酒 ≤1.5 公升 或 烈酒 ≤1.14 公升", "商業密封零食（須於入境卡申報）"],
+      banEn: ["Meat & poultry products", "Eggs & dairy products", "Fresh fruit, vegetables & plants"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free wine ≤1.5L or spirits ≤1.14L", "Commercially sealed snacks (declare)"]
+    },
+    IN: {
+      countryZh: "印度", countryEn: "India",
+      officialUrl: "https://www.cbic.gov.in/",
+      banZh: ["無衛生檢疫證明之生鮮肉類", "未經檢疫蛋類及乳製品", "衛星電話、對講機及無人機"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅酒類 ≤2 公升", "個人自用商業包裝乾糧"],
+      banEn: ["Raw meat without sanitary clearance", "Uninspected eggs & dairy products", "Satellite phones, walkie-talkies & drones"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free alcohol ≤2L", "Personal commercially packaged dry snacks"]
+    },
+    JP: {
+      countryZh: "日本", countryEn: "Japan",
+      officialUrl: "https://www.customs.go.jp/english/summary/passenger.htm",
+      banZh: ["所有肉類及肉製品（火腿、香腸、肉鬆、牛肉乾、含肉真空包）", "新鮮水果及蔬菜", "無檢疫證明之蛋類"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅酒類 ≤3 瓶（每瓶約 760ml）", "商業密封餅乾、朱古力及手信"],
+      banEn: ["All meat & meat products (ham, jerky, sausages)", "Fresh fruits & vegetables", "Eggs without quarantine certificate"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free alcohol ≤3 bottles (~760ml each)", "Commercially sealed snacks & sweets"]
+    },
+    KR: {
+      countryZh: "韓國", countryEn: "South Korea",
+      officialUrl: "https://www.customs.go.kr/english/cm/cntnts/cntntsView.do?mi=8028&cntntsId=2714",
+      banZh: ["所有肉類製品（肉乾、香腸、火腿、肉鬆）", "新鮮水果、蔬菜及植物", "未經檢疫之蛋類及乳製品"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅酒類 ≤2 瓶（總量 ≤2 公升，價值 ≤US$400）", "商業密封包裝餅乾及海苔"],
+      banEn: ["All meat products (jerky, sausages, ham)", "Fresh fruits, vegetables & plants", "Uninspected eggs & dairy products"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free alcohol ≤2 bottles (≤2L total)", "Commercially sealed snacks & seaweed"]
+    },
+    TW: {
+      countryZh: "台灣", countryEn: "Taiwan",
+      officialUrl: "https://web.customs.gov.tw/en/",
+      banZh: ["所有豬肉及肉類製品（違者重罰 NT$20 萬起）", "新鮮水果及未經檢疫植物", "未煮熟蛋類及禽肉"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅酒類 ≤1.5 公升（年滿18歲）", "商業密封包裝糕餅（不含肉鬆/蛋黃）"],
+      banEn: ["All pork & meat products (heavy fines from NT$200,000)", "Fresh fruits & uninspected plants", "Uncooked eggs & poultry"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free alcohol ≤1.5L (age 18+)", "Commercially sealed pastries (no meat/egg yolk)"]
+    },
+    CN: {
+      countryZh: "中國內地", countryEn: "Mainland China",
+      officialUrl: "http://english.customs.gov.cn/",
+      banZh: ["新鮮水果及蔬菜", "生熟肉類（含臟器類）及其製品", "蛋類及其製品（如鹹蛋、月餅含蛋黃）", "奶類及乳製品"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅酒類 ≤1.5 公升（酒精濃度 12% 以上）", "商業密封包裝餅乾及茶葉"],
+      banEn: ["Fresh fruits & vegetables", "Raw/cooked meat & meat products", "Eggs & egg products (incl. egg-yolk mooncakes)", "Milk & dairy products"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free alcohol ≤1.5L (>12% ABV)", "Commercially sealed snacks & tea"]
+    },
+    EU: {
+      countryZh: "歐盟 / 申根區", countryEn: "European Union",
+      officialUrl: "https://taxation-customs.ec.europa.eu/customs-4/customs-controls/travellers_en",
+      banZh: ["非歐盟地區肉類及肉製品", "奶類及乳製品", "蛋類及蛋製品", "未附植物檢疫證書之新鮮蔬果"],
+      allowZh: ["隨身液體（每瓶 ≤100ml，放入 1L 透明袋）", "免稅葡萄酒 ≤4 公升及烈酒 ≤1 公升", "個人自用藥物"],
+      banEn: ["Meat & meat products from outside EU", "Milk & dairy products", "Eggs & egg products", "Fresh produce without phytosanitary certificate"],
+      allowEn: ["Carry-on liquids (≤100ml in 1L clear bag)", "Duty-free wine ≤4L & spirits ≤1L", "Personal medication"]
+    },
+    AE: {
+      countryZh: "阿聯酋 / 中東", countryEn: "UAE / Middle East",
+      officialUrl: "https://www.dubaicustoms.gov.ae/en/Passengers/Pages/default.aspx",
+      banZh: ["豬肉及含豬肉成分食品", "含可待因或受管制精神科藥物（須備醫生證明）", "色情物品及未經許可無人機"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅酒類 ≤4 公升（非穆斯林旅客，沙地阿拉伯嚴禁任何酒類）", "個人自用包裝零食"],
+      banEn: ["Pork & pork-containing products", "Controlled medications without medical certificate", "Adult material & unlicensed drones"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free alcohol ≤4L (UAE/Qatar; strictly banned in Saudi Arabia)", "Personal packaged snacks"]
+    },
+    ZA: {
+      countryZh: "南非", countryEn: "South Africa",
+      officialUrl: "https://www.sars.gov.za/customs-and-excise/travellers/",
+      banZh: ["未經許可肉類、家禽及乳製品", "新鮮蔬果、種子及植物", "受管制藥物及武器"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅葡萄酒 ≤2 公升 及 烈酒 ≤1 公升", "個人自用商業密封食品"],
+      banEn: ["Unlicensed meat, poultry & dairy products", "Fresh produce, seeds & plants", "Controlled drugs & weapons"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free wine ≤2L & spirits ≤1L", "Personal commercially sealed food"]
+    },
+    SG: {
+      countryZh: "新加坡", countryEn: "Singapore",
+      officialUrl: "https://www.customs.gov.sg/individuals/going-through-customs/arrivals/duty-free-concession-and-gst-relief/",
+      banZh: ["口香糖（非醫用嚴禁入境）", "電子煙及加熱煙草產品", "無檢疫許可之肉類及蛋類"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅酒類 ≤2 公升（如烈酒 1L + 葡萄酒 1L）", "商業密封包裝零食及手信"],
+      banEn: ["Chewing gum (strictly prohibited)", "E-cigarettes & heated tobacco products", "Meat & eggs without import permit"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free alcohol ≤2L total (e.g. 1L spirits + 1L wine)", "Commercially sealed snacks"]
+    },
+    TH: {
+      countryZh: "泰國", countryEn: "Thailand",
+      officialUrl: "https://www.customs.go.th/",
+      banZh: ["電子煙及相關配件（違者重罰或監禁）", "未經檢疫之生鮮肉類及蔬果", "受管制大麻製品"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅酒類 ≤1 公升（嚴格執行，切勿超額）", "商業密封包裝食品"],
+      banEn: ["E-cigarettes & vaping devices (strictly illegal)", "Uninspected raw meat & fresh produce", "Regulated cannabis products"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free alcohol ≤1L (strictly enforced)", "Commercially sealed food"]
+    },
+    SEA: {
+      countryZh: "東南亞航點", countryEn: "Southeast Asia",
+      officialUrl: "https://www.iatatravelcentre.com/",
+      banZh: ["生鮮肉類、家禽及未經檢疫蔬果", "電子煙（部分國家如新加坡/泰國/越南嚴禁）", "受管制藥物"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "免稅酒類 ≤1 至 2 公升（視乎當地規定）", "商業密封包裝乾糧及零食"],
+      banEn: ["Raw meat, poultry & uninspected produce", "E-cigarettes (banned in several SEA countries)", "Controlled medications"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free alcohol ≤1–2L (varies by country)", "Commercially sealed dry snacks"]
+    },
+    HK: {
+      countryZh: "香港", countryEn: "Hong Kong",
+      officialUrl: "https://www.customs.gov.hk/en/service-enforcement-information/passenger-clearance/index.html",
+      banZh: ["無官方衛生證明之生肉、野味及家禽", "無衛生證明之蛋類", "受管制武器、電子煙及違禁藥物"],
+      allowZh: ["隨身液體（每瓶 ≤100ml）", "年滿18歲免稅可帶 1 公升烈酒（>30% ABV）", "熟食及商業包裝食品"],
+      banEn: ["Raw meat, game & poultry without health certificate", "Eggs without official health certificate", "Controlled weapons, vapes & illicit drugs"],
+      allowEn: ["Carry-on liquids (≤100ml per item)", "Duty-free 1L liquor (>30% ABV) for age 18+", "Cooked & commercially packaged food"]
+    },
+    GENERAL: {
+      countryZh: "國際通用海關指引", countryEn: "International Customs Advisory",
+      officialUrl: "https://www.iatatravelcentre.com/",
+      banZh: ["生鮮肉類、乳製品、蛋類及新鮮蔬果（絕大部分國家嚴禁未申報入境）", "隨身超過 100ml 之液體、凝膠及噴霧", "備用鋰電池及充電寶不可寄艙（必須隨身攜帶）"],
+      allowZh: ["隨身液體每瓶 ≤100ml 並裝入 1 公升透明密封袋", "個人自用藥物（建議保留原包裝及醫生證明）", "商業密封包裝餅乾及糖果（入境時按需要申報）"],
+      banEn: ["Raw meat, dairy, eggs & fresh produce (prohibited in most countries)", "Carry-on liquids, gels & aerosols >100ml", "Spare lithium batteries & power banks in checked baggage"],
+      allowEn: ["Carry-on liquids ≤100ml per container in 1L clear bag", "Personal medication in original packaging", "Commercially sealed snacks (declare if required)"]
+    }
+  };
+
+  /* 國泰航空全線 85+ 客運航點（含 IANA 時區確保當地即時時鐘準確） */
+  const AIRPORT_DB = {
+    HKG: { city: "香港", en: "Hong Kong", countryCode: "HK", fullCountryZh: "香港", offset: 8, tz: "Asia/Hong_Kong", lat: 22.308, lon: 113.918 },
+    TPE: { city: "台北", en: "Taipei", countryCode: "TW", fullCountryZh: "台灣台北", offset: 8, tz: "Asia/Taipei", lat: 25.079, lon: 121.234 },
+    KHH: { city: "高雄", en: "Kaohsiung", countryCode: "TW", fullCountryZh: "台灣高雄", offset: 8, tz: "Asia/Taipei", lat: 22.577, lon: 120.350 },
+    PEK: { city: "北京首都", en: "Beijing Capital", countryCode: "CN", fullCountryZh: "中國北京", offset: 8, tz: "Asia/Shanghai", lat: 40.079, lon: 116.603 },
+    PVG: { city: "上海浦東", en: "Shanghai Pudong", countryCode: "CN", fullCountryZh: "中國上海浦東", offset: 8, tz: "Asia/Shanghai", lat: 31.144, lon: 121.808 },
+    SHA: { city: "上海虹橋", en: "Shanghai Hongqiao", countryCode: "CN", fullCountryZh: "中國上海虹橋", offset: 8, tz: "Asia/Shanghai", lat: 31.197, lon: 121.336 },
+    CAN: { city: "廣州", en: "Guangzhou", countryCode: "CN", fullCountryZh: "中國廣州", offset: 8, tz: "Asia/Shanghai", lat: 23.392, lon: 113.299 },
+    TFU: { city: "成都天府", en: "Chengdu Tianfu", countryCode: "CN", fullCountryZh: "中國成都", offset: 8, tz: "Asia/Shanghai", lat: 30.312, lon: 104.441 },
+    CKG: { city: "重慶", en: "Chongqing", countryCode: "CN", fullCountryZh: "中國重慶", offset: 8, tz: "Asia/Shanghai", lat: 29.719, lon: 106.642 },
+    HGH: { city: "杭州", en: "Hangzhou", countryCode: "CN", fullCountryZh: "中國杭州", offset: 8, tz: "Asia/Shanghai", lat: 30.229, lon: 120.434 },
+    NKG: { city: "南京", en: "Nanjing", countryCode: "CN", fullCountryZh: "中國南京", offset: 8, tz: "Asia/Shanghai", lat: 31.742, lon: 118.862 },
+    XMN: { city: "廈門", en: "Xiamen", countryCode: "CN", fullCountryZh: "中國廈門", offset: 8, tz: "Asia/Shanghai", lat: 24.544, lon: 118.128 },
+    FOC: { city: "福州", en: "Fuzhou", countryCode: "CN", fullCountryZh: "中國福州", offset: 8, tz: "Asia/Shanghai", lat: 25.935, lon: 119.663 },
+    WUH: { city: "武漢", en: "Wuhan", countryCode: "CN", fullCountryZh: "中國武漢", offset: 8, tz: "Asia/Shanghai", lat: 30.783, lon: 114.208 },
+    XIY: { city: "西安", en: "Xi'an", countryCode: "CN", fullCountryZh: "中國西安", offset: 8, tz: "Asia/Shanghai", lat: 34.447, lon: 108.752 },
+    TAO: { city: "青島", en: "Qingdao", countryCode: "CN", fullCountryZh: "中國青島", offset: 8, tz: "Asia/Shanghai", lat: 36.366, lon: 120.097 },
+    CGO: { city: "鄭州", en: "Zhengzhou", countryCode: "CN", fullCountryZh: "中國鄭州", offset: 8, tz: "Asia/Shanghai", lat: 34.519, lon: 113.841 },
+    HAK: { city: "海口", en: "Haikou", countryCode: "CN", fullCountryZh: "中國海口", offset: 8, tz: "Asia/Shanghai", lat: 19.934, lon: 110.459 },
+    WNZ: { city: "溫州", en: "Wenzhou", countryCode: "CN", fullCountryZh: "中國溫州", offset: 8, tz: "Asia/Shanghai", lat: 27.912, lon: 120.852 },
+    NGB: { city: "寧波", en: "Ningbo", countryCode: "CN", fullCountryZh: "中國寧波", offset: 8, tz: "Asia/Shanghai", lat: 29.826, lon: 121.462 },
+
+    NRT: { city: "東京成田", en: "Tokyo Narita", countryCode: "JP", fullCountryZh: "日本東京成田", offset: 9, tz: "Asia/Tokyo", lat: 35.772, lon: 140.392 },
+    HND: { city: "東京羽田", en: "Tokyo Haneda", countryCode: "JP", fullCountryZh: "日本東京羽田", offset: 9, tz: "Asia/Tokyo", lat: 35.549, lon: 139.779 },
+    KIX: { city: "大阪關西", en: "Osaka Kansai", countryCode: "JP", fullCountryZh: "日本大阪關西", offset: 9, tz: "Asia/Tokyo", lat: 34.434, lon: 135.244 },
+    NGO: { city: "名古屋", en: "Nagoya", countryCode: "JP", fullCountryZh: "日本名古屋", offset: 9, tz: "Asia/Tokyo", lat: 34.858, lon: 136.805 },
+    FUK: { city: "福岡", en: "Fukuoka", countryCode: "JP", fullCountryZh: "日本福岡", offset: 9, tz: "Asia/Tokyo", lat: 33.585, lon: 130.451 },
+    CTS: { city: "札幌", en: "Sapporo", countryCode: "JP", fullCountryZh: "日本札幌", offset: 9, tz: "Asia/Tokyo", lat: 42.775, lon: 141.692 },
+    ICN: { city: "首爾仁川", en: "Seoul Incheon", countryCode: "KR", fullCountryZh: "韓國首爾", offset: 9, tz: "Asia/Seoul", lat: 37.460, lon: 126.440 },
+
+    SIN: { city: "新加坡", en: "Singapore", countryCode: "SG", fullCountryZh: "新加坡", offset: 8, tz: "Asia/Singapore", lat: 1.364, lon: 103.991 },
+    BKK: { city: "曼谷", en: "Bangkok", countryCode: "TH", fullCountryZh: "泰國曼谷", offset: 7, tz: "Asia/Bangkok", lat: 13.690, lon: 100.750 },
+    HKT: { city: "布吉", en: "Phuket", countryCode: "TH", fullCountryZh: "泰國布吉", offset: 7, tz: "Asia/Bangkok", lat: 8.113, lon: 98.316 },
+    KUL: { city: "吉隆坡", en: "Kuala Lumpur", countryCode: "SEA", fullCountryZh: "馬來西亞吉隆坡", offset: 8, tz: "Asia/Kuala_Lumpur", lat: 2.745, lon: 101.707 },
+    PEN: { city: "檳城", en: "Penang", countryCode: "SEA", fullCountryZh: "馬來西亞檳城", offset: 8, tz: "Asia/Kuala_Lumpur", lat: 5.297, lon: 100.277 },
+    CGK: { city: "雅加達", en: "Jakarta", countryCode: "SEA", fullCountryZh: "印尼雅加達", offset: 7, tz: "Asia/Jakarta", lat: -6.125, lon: 106.655 },
+    DPS: { city: "峇里島", en: "Denpasar Bali", countryCode: "SEA", fullCountryZh: "印尼峇里島", offset: 8, tz: "Asia/Makassar", lat: -8.748, lon: 115.167 },
+    SUB: { city: "泗水", en: "Surabaya", countryCode: "SEA", fullCountryZh: "印尼泗水", offset: 7, tz: "Asia/Jakarta", lat: -7.379, lon: 112.787 },
+    MNL: { city: "馬尼拉", en: "Manila", countryCode: "SEA", fullCountryZh: "菲律賓馬尼拉", offset: 8, tz: "Asia/Manila", lat: 14.508, lon: 121.019 },
+    CEB: { city: "宿霧", en: "Cebu", countryCode: "SEA", fullCountryZh: "菲律賓宿霧", offset: 8, tz: "Asia/Manila", lat: 10.307, lon: 123.979 },
+    SGN: { city: "胡志明市", en: "Ho Chi Minh City", countryCode: "SEA", fullCountryZh: "越南胡志明市", offset: 7, tz: "Asia/Ho_Chi_Minh", lat: 10.818, lon: 106.652 },
+    HAN: { city: "河內", en: "Hanoi", countryCode: "SEA", fullCountryZh: "越南河內", offset: 7, tz: "Asia/Ho_Chi_Minh", lat: 21.221, lon: 105.807 },
+    PNH: { city: "金邊", en: "Phnom Penh", countryCode: "SEA", fullCountryZh: "柬埔寨金邊", offset: 7, tz: "Asia/Phnom_Penh", lat: 11.546, lon: 104.844 },
+
+    DEL: { city: "德里", en: "Delhi", countryCode: "IN", fullCountryZh: "印度德里", offset: 5.5, tz: "Asia/Kolkata", lat: 28.556, lon: 77.100 },
+    BOM: { city: "孟買", en: "Mumbai", countryCode: "IN", fullCountryZh: "印度孟買", offset: 5.5, tz: "Asia/Kolkata", lat: 19.089, lon: 72.865 },
+    BLR: { city: "班加羅爾", en: "Bengaluru", countryCode: "IN", fullCountryZh: "印度班加羅爾", offset: 5.5, tz: "Asia/Kolkata", lat: 13.198, lon: 77.706 },
+    HYD: { city: "海得拉巴", en: "Hyderabad", countryCode: "IN", fullCountryZh: "印度海得拉巴", offset: 5.5, tz: "Asia/Kolkata", lat: 17.240, lon: 78.429 },
+    MAA: { city: "欽奈", en: "Chennai", countryCode: "IN", fullCountryZh: "印度欽奈", offset: 5.5, tz: "Asia/Kolkata", lat: 12.994, lon: 80.170 },
+    CMB: { city: "科倫坡", en: "Colombo", countryCode: "IN", fullCountryZh: "斯里蘭卡科倫坡", offset: 5.5, tz: "Asia/Colombo", lat: 7.180, lon: 79.884 },
+    DAC: { city: "達卡", en: "Dhaka", countryCode: "IN", fullCountryZh: "孟加拉達卡", offset: 6, tz: "Asia/Dhaka", lat: 23.843, lon: 90.397 },
+    KTM: { city: "加德滿都", en: "Kathmandu", countryCode: "IN", fullCountryZh: "尼泊爾加德滿都", offset: 5.75, tz: "Asia/Kathmandu", lat: 27.696, lon: 85.359 },
+    DXB: { city: "杜拜", en: "Dubai", countryCode: "AE", fullCountryZh: "阿聯酋杜拜", offset: 4, tz: "Asia/Dubai", lat: 25.253, lon: 55.365 },
+    DOH: { city: "多哈", en: "Doha", countryCode: "AE", fullCountryZh: "卡塔爾多哈", offset: 3, tz: "Asia/Qatar", lat: 25.273, lon: 51.608 },
+    RUH: { city: "利雅得", en: "Riyadh", countryCode: "AE", fullCountryZh: "沙特阿拉伯利雅得", offset: 3, tz: "Asia/Riyadh", lat: 24.957, lon: 46.698 },
+    TLV: { city: "特拉維夫", en: "Tel Aviv", countryCode: "AE", fullCountryZh: "以色列特拉維夫", offset: 2, tz: "Asia/Jerusalem", lat: 32.005, lon: 34.885 },
+
+    LHR: { city: "倫敦希斯路", en: "London Heathrow", countryCode: "GB", fullCountryZh: "英國倫敦", offset: 0, tz: "Europe/London", lat: 51.470, lon: -0.454 },
+    MAN: { city: "曼徹斯特", en: "Manchester", countryCode: "GB", fullCountryZh: "英國曼徹斯特", offset: 0, tz: "Europe/London", lat: 53.354, lon: -2.275 },
+    FRA: { city: "法蘭克福", en: "Frankfurt", countryCode: "EU", fullCountryZh: "德國法蘭克福", offset: 1, tz: "Europe/Berlin", lat: 50.037, lon: 8.562 },
+    MUC: { city: "慕尼黑", en: "Munich", countryCode: "EU", fullCountryZh: "德國慕尼黑", offset: 1, tz: "Europe/Berlin", lat: 48.353, lon: 11.775 },
+    CDG: { city: "巴黎戴高樂", en: "Paris CDG", countryCode: "EU", fullCountryZh: "法國巴黎", offset: 1, tz: "Europe/Paris", lat: 49.009, lon: 2.547 },
+    AMS: { city: "阿姆斯特丹", en: "Amsterdam", countryCode: "EU", fullCountryZh: "荷蘭阿姆斯特丹", offset: 1, tz: "Europe/Amsterdam", lat: 52.310, lon: 4.768 },
+    ZRH: { city: "蘇黎世", en: "Zurich", countryCode: "EU", fullCountryZh: "瑞士蘇黎世", offset: 1, tz: "Europe/Zurich", lat: 47.458, lon: 8.555 },
+    MXP: { city: "米蘭", en: "Milan", countryCode: "EU", fullCountryZh: "意大利米蘭", offset: 1, tz: "Europe/Rome", lat: 45.630, lon: 8.723 },
+    FCO: { city: "羅馬", en: "Rome", countryCode: "EU", fullCountryZh: "意大利羅馬", offset: 1, tz: "Europe/Rome", lat: 41.800, lon: 12.238 },
+    MAD: { city: "馬德里", en: "Madrid", countryCode: "EU", fullCountryZh: "西班牙馬德里", offset: 1, tz: "Europe/Madrid", lat: 40.498, lon: -3.567 },
+    BCN: { city: "巴塞隆拿", en: "Barcelona", countryCode: "EU", fullCountryZh: "西班牙巴塞隆拿", offset: 1, tz: "Europe/Madrid", lat: 41.297, lon: 2.083 },
+    BRU: { city: "布魯塞爾", en: "Brussels", countryCode: "EU", fullCountryZh: "比利時布魯塞爾", offset: 1, tz: "Europe/Brussels", lat: 50.901, lon: 4.484 },
+
+    LAX: { city: "洛杉磯", en: "Los Angeles", countryCode: "US", fullCountryZh: "美國洛杉磯", offset: -8, tz: "America/Los_Angeles", lat: 33.941, lon: -118.408 },
+    SFO: { city: "三藩市", en: "San Francisco", countryCode: "US", fullCountryZh: "美國三藩市", offset: -8, tz: "America/Los_Angeles", lat: 37.621, lon: -122.379 },
+    DFW: { city: "達拉斯", en: "Dallas", countryCode: "US", fullCountryZh: "美國達拉斯", offset: -6, tz: "America/Chicago", lat: 32.899, lon: -97.040 },
+    ORD: { city: "芝加哥", en: "Chicago", countryCode: "US", fullCountryZh: "美國芝加哥", offset: -6, tz: "America/Chicago", lat: 41.974, lon: -87.907 },
+    JFK: { city: "紐約甘迺迪", en: "New York JFK", countryCode: "US", fullCountryZh: "美國紐約", offset: -5, tz: "America/New_York", lat: 40.641, lon: -73.778 },
+    EWR: { city: "紐瓦克", en: "Newark", countryCode: "US", fullCountryZh: "美國紐瓦克", offset: -5, tz: "America/New_York", lat: 40.689, lon: -74.174 },
+    BOS: { city: "波士頓", en: "Boston", countryCode: "US", fullCountryZh: "美國波士頓", offset: -5, tz: "America/New_York", lat: 42.365, lon: -71.009 },
+    IAD: { city: "華盛頓", en: "Washington Dulles", countryCode: "US", fullCountryZh: "美國華盛頓", offset: -5, tz: "America/New_York", lat: 38.953, lon: -77.456 },
+    SEA: { city: "西雅圖", en: "Seattle", countryCode: "US", fullCountryZh: "美國西雅圖", offset: -8, tz: "America/Los_Angeles", lat: 47.450, lon: -122.308 },
+    YVR: { city: "溫哥華", en: "Vancouver", countryCode: "CA", fullCountryZh: "加拿大溫哥華", offset: -8, tz: "America/Vancouver", lat: 49.196, lon: -123.181 },
+    YYZ: { city: "多倫多", en: "Toronto", countryCode: "CA", fullCountryZh: "加拿大多倫多", offset: -5, tz: "America/Toronto", lat: 43.677, lon: -79.624 },
+
+    SYD: { city: "悉尼", en: "Sydney", countryCode: "AU", fullCountryZh: "澳洲悉尼", offset: 11, tz: "Australia/Sydney", lat: -33.939, lon: 151.175 },
+    MEL: { city: "墨爾本", en: "Melbourne", countryCode: "AU", fullCountryZh: "澳洲墨爾本", offset: 11, tz: "Australia/Melbourne", lat: -37.669, lon: 144.841 },
+    BNE: { city: "布里斯本", en: "Brisbane", countryCode: "AU", fullCountryZh: "澳洲布里斯本", offset: 10, tz: "Australia/Brisbane", lat: -27.394, lon: 153.122 },
+    PER: { city: "珀斯", en: "Perth", countryCode: "AU", fullCountryZh: "澳洲珀斯", offset: 8, tz: "Australia/Perth", lat: -31.938, lon: 115.967 },
+    ADL: { city: "阿德萊德", en: "Adelaide", countryCode: "AU", fullCountryZh: "澳洲阿德萊德", offset: 10.5, tz: "Australia/Adelaide", lat: -34.945, lon: 138.531 },
+    CNS: { city: "開恩茲", en: "Cairns", countryCode: "AU", fullCountryZh: "澳洲開恩茲", offset: 10, tz: "Australia/Brisbane", lat: -16.885, lon: 145.755 },
+    AKL: { city: "奧克蘭", en: "Auckland", countryCode: "NZ", fullCountryZh: "紐西蘭奧克蘭", offset: 13, tz: "Pacific/Auckland", lat: -37.008, lon: 174.785 },
+    CHC: { city: "基督城", en: "Christchurch", countryCode: "NZ", fullCountryZh: "紐西蘭基督城", offset: 13, tz: "Pacific/Auckland", lat: -43.489, lon: 172.532 },
+    JNB: { city: "約翰內斯堡", en: "Johannesburg", countryCode: "ZA", fullCountryZh: "南非約翰內斯堡", offset: 2, tz: "Africa/Johannesburg", lat: -26.139, lon: 28.246 },
+    CPT: { city: "開普敦", en: "Cape Town", countryCode: "ZA", fullCountryZh: "南非開普敦", offset: 2, tz: "Africa/Johannesburg", lat: -33.971, lon: 18.602 }
+  };
+
+  const WEEKDAYS_ZH = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+  const WEEKDAYS_EN = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  const MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const MONTHS_MAP = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
+
+  const DEFAULT_ROSTER_TEXT = `Dec 26 Roster
+01-Dec-26 T G
+02-Dec-26 W G
+03-Dec-26 T G
+04-Dec-26 F G
+05-Dec-26 S 0135 HKG MEL 35G 1740L 1905L 0710L+1 0740L+1 11:00 9:05
+06-Dec-26 S
+07-Dec-26 M
+08-Dec-26 T 0134 MEL HKG 35G 0740L 0840L 1450L 1520L 10:40 9:10
+09-Dec-26 W G
+10-Dec-26 T G
+11-Dec-26 F G
+12-Dec-26 S G
+13-Dec-26 S G
+14-Dec-26 M 0882 HKG LAX 77K 1825L 1950L 1630L 1700L 14:35 12:40
+15-Dec-26 T
+16-Dec-26 W 0883 LAX HKG 77K 2020L 2120L 0505L+2 0535L+2 17:15 15:45
+17-Dec-26 T
+18-Dec-26 F
+19-Dec-26 S G
+20-Dec-26 S G
+21-Dec-26 M G
+22-Dec-26 T G
+23-Dec-26 W G
+24-Dec-26 T 0876 HKG DFW 35J 1505L 1630L 1650L 1720L 16:15 14:20
+25-Dec-26 F
+26-Dec-26 S
+27-Dec-26 S 0891 DFW HKG 35J 2230L 2330L 0615L+2 0645L+2 18:15 16:45
+28-Dec-26 M
+29-Dec-26 T
+30-Dec-26 W G
+31-Dec-26 T G`;
+
+  let currentRoster = [];
+  let headerMonthInfo = { year: 2026, month: 11 };
+  let activeMonthKey = "2026-11";
+  let savedMonthsStore = {};
+  let viewMode = "crew";
+  let liveClockTimer = null;
+
+  const CAL_SIZES = ["md", "lg", "xl"];
+  const CAL_SIZE_LABELS = { md: "M", lg: "L", xl: "XL" };
+  let calSizeIdx = 0;
+
+  function loadMonthsStore() {
+    try {
+      const rawJson = safeStorage.get("pui_cx_months_v2");
+      if (rawJson) {
+        const obj = JSON.parse(rawJson);
+        if (obj && typeof obj === "object") return obj;
+      }
+    } catch (e) {}
+    return {};
+  }
+
+  function saveMonthsStore() {
+    safeStorage.set("pui_cx_months_v2", JSON.stringify(savedMonthsStore));
+  }
+
+  function initApp() {
+    try {
+      const savedSize = safeStorage.get("pui_cx_cal_size");
+      if (savedSize && CAL_SIZES.includes(savedSize)) {
+        calSizeIdx = CAL_SIZES.indexOf(savedSize);
+      }
+      applyCalFontSize();
+
+      savedMonthsStore = loadMonthsStore();
+      const legacyRaw = safeStorage.get("pui_cx_roster_final");
+
+      if (Object.keys(savedMonthsStore).length === 0) {
+        const seedText = legacyRaw || DEFAULT_ROSTER_TEXT;
+        const parsed = parseRosterText(seedText);
+        if (parsed.length > 0) {
+          const ymKey = `${headerMonthInfo.year}-${String(headerMonthInfo.month + 1).padStart(2, "0")}`;
+          savedMonthsStore[ymKey] = seedText;
+          saveMonthsStore();
+        }
+      }
+
+      const sortedKeys = Object.keys(savedMonthsStore).sort();
+      const lastActive = safeStorage.get("pui_cx_active_ym");
+      activeMonthKey = (lastActive && savedMonthsStore[lastActive]) ? lastActive : sortedKeys[sortedKeys.length - 1];
+
+      const raw = savedMonthsStore[activeMonthKey] || DEFAULT_ROSTER_TEXT;
+      const parsed = parseRosterText(raw);
+      const inputEl = document.getElementById("rawTextInput");
+      if (inputEl) inputEl.value = raw;
+      currentRoster = parsed;
+      previewTableFromText();
+      renderAll();
+    } catch (err) {
+      currentRoster = parseRosterText(DEFAULT_ROSTER_TEXT);
+      renderAll();
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initApp);
+  } else {
+    initApp();
+  }
+
+  function switchMonth(dir) {
+    const keys = Object.keys(savedMonthsStore).sort();
+    const curIdx = keys.indexOf(activeMonthKey);
+    const nextIdx = curIdx + dir;
+    if (nextIdx < 0 || nextIdx >= keys.length) return;
+
+    activeMonthKey = keys[nextIdx];
+    safeStorage.set("pui_cx_active_ym", activeMonthKey);
+    const raw = savedMonthsStore[activeMonthKey];
+    currentRoster = parseRosterText(raw);
+    const inputEl = document.getElementById("rawTextInput");
+    if (inputEl) inputEl.value = raw;
+    renderAll();
+    showToast(`已切換至 ${MONTHS_EN[headerMonthInfo.month]} ${headerMonthInfo.year}`);
+  }
+
+  function updateMonthNavButtons() {
+    const keys = Object.keys(savedMonthsStore).sort();
+    const curIdx = keys.indexOf(activeMonthKey);
+    const prevBtn = document.getElementById("prevMonthBtn");
+    const nextBtn = document.getElementById("nextMonthBtn");
+    if (prevBtn) prevBtn.disabled = curIdx <= 0;
+    if (nextBtn) nextBtn.disabled = curIdx === -1 || curIdx >= keys.length - 1;
+  }
+
+  function changeCalFontSize(delta) {
+    calSizeIdx = Math.min(CAL_SIZES.length - 1, Math.max(0, calSizeIdx + delta));
+    applyCalFontSize();
+    safeStorage.set("pui_cx_cal_size", CAL_SIZES[calSizeIdx]);
+  }
+
+  function applyCalFontSize() {
+    const sizeKey = CAL_SIZES[calSizeIdx];
+    document.documentElement.setAttribute("data-cal-size", sizeKey);
+    setText("calFontSizeLabel", CAL_SIZE_LABELS[sizeKey]);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById("toast");
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 3000);
+  }
+
+  function toggleTheme() {
+    const body = document.body;
+    const isDark = body.getAttribute("data-theme") === "dark";
+    body.setAttribute("data-theme", isDark ? "light" : "dark");
+    updateStaticLabels();
+  }
+
+  function setViewMode(mode) {
+    viewMode = mode;
+    const cBtn = document.getElementById("btnCrewMode");
+    const fBtn = document.getElementById("btnFamilyMode");
+    if (cBtn) cBtn.classList.toggle("active", mode === "crew");
+    if (fBtn) fBtn.classList.toggle("active", mode === "family");
+    renderAll();
+  }
+
+  function updateStaticLabels() {
+    const isCrew = viewMode === "crew";
+    const isDark = document.body.getAttribute("data-theme") === "dark";
+
+    setText("themeBtn", isCrew ? (isDark ? "Day" : "Night") : (isDark ? "日間" : "夜間"));
+    setText("importTopBtn", isCrew ? "Import" : "匯入更表");
+
+    setText("refreshBtn", isCrew ? "Refresh Progress" : "刷新航班進度");
+    setText("heroRadarLink", isCrew ? "Flightradar24 ↗" : "Flightradar24 追蹤 ↗");
+
+    setText("statLabel1", isCrew ? "Block Hours" : "本月飛行時數");
+    setText("statLabel2", isCrew ? "Duty Days" : "執勤及外站");
+    setText("statLabel3", isCrew ? "Off Days" : "G 假 / 休息");
+
+    setText("btnExportImg", "匯出圖片");
+    setText("btnExportIcs", "匯出日曆");
+
+    setText("prevMonthBtn", isCrew ? "‹ Prev" : "‹ 上月");
+    setText("nextMonthBtn", isCrew ? "Next ›" : "下月 ›");
+
+    setText("closeDetailBtn", isCrew ? "Close" : "關閉");
+    setText("importModalTitle", isCrew ? "Import CX Roster" : "匯入國泰 (CX) 更表");
+    setText("closeImportBtn", isCrew ? "Close" : "關閉");
+    setText("fileDropTitle", isCrew ? "Select PDF / JPG / PNG / CSV" : "點擊選擇檔案 (PDF / JPG / PNG / CSV)");
+    setText("fileDropSub", isCrew ? "Tap here to choose from Photos or Files" : "從「照片圖庫」或「檔案」揀選");
+    setText("pasteLabel", isCrew ? "Roster text (editable before update):" : "更表文字（可手動修改）：");
+    setText("tablePreviewLabel", isCrew ? "Table Grid Validation (Excel Style):" : "Excel 表格預覽（黃色為自動補齊）：");
+    setText("demoBtn", isCrew ? "Demo Sample" : "載入範本");
+    setText("applyBtn", isCrew ? "Parse & Update" : "解析並更新月曆");
+    setText("btnClearIcs", isCrew ? "Download Clear Calendar (.ics)" : "下載日曆清除檔 (Clear .ics)");
+
+    setHtml("calLegend", isCrew
+      ? `<span><i class="legend-dot" style="background:var(--cx-jade);"></i>Dep</span>
+         <span><i class="legend-dot" style="background:#7CC9C6;"></i>Arr/Transit</span>
+         <span><i class="legend-dot" style="background:var(--cx-gold);"></i>Layover</span>
+         <span><i class="legend-dot" style="background:var(--cx-sby);"></i>SBY</span>
+         <span><i class="legend-dot" style="background:var(--cx-trg);"></i>TRG</span>
+         <span><i class="legend-dot" style="background:#9EB0AF;"></i>Off</span>`
+      : `<span><i class="legend-dot" style="background:var(--cx-jade);"></i>起飛執勤</span>
+         <span><i class="legend-dot" style="background:#7CC9C6;"></i>在途/抵港</span>
+         <span><i class="legend-dot" style="background:var(--cx-gold);"></i>外站</span>
+         <span><i class="legend-dot" style="background:var(--cx-sby);"></i>待命</span>
+         <span><i class="legend-dot" style="background:var(--cx-trg);"></i>培訓</span>
+         <span><i class="legend-dot" style="background:#9EB0AF;"></i>休息</span>`);
+
+    const wkArr = isCrew ? WEEKDAYS_EN : WEEKDAYS_ZH;
+    setHtml("calWeekdays", wkArr.map(d => `<div>${d}</div>`).join(""));
+  }
+
+  function parseDateStr(dStr) {
+    const parts = dStr.split("-");
+    const monKey = parts[1].charAt(0).toUpperCase() + parts[1].slice(1, 3).toLowerCase();
+    return new Date(2000 + parseInt(parts[2], 10), MONTHS_MAP[monKey], parseInt(parts[0], 10));
+  }
+
+  function formatShortDate(dObj) {
+    const dd = String(dObj.getDate()).padStart(2, "0");
+    const mmm = MONTHS_EN[dObj.getMonth()].toUpperCase();
+    const yy = String(dObj.getFullYear()).slice(-2);
+    return `${dd} ${mmm} ${yy}`;
+  }
+
+  function formatDateInputKey(dObj) {
+    const dd = String(dObj.getDate()).padStart(2, "0");
+    const mmm = MONTHS_EN[dObj.getMonth()];
+    const yy = String(dObj.getFullYear()).slice(-2);
+    return `${dd}-${mmm}-${yy}`;
+  }
+
+  function convertToHKT(baseDateObj, timeStrWithOffset, airportCode) {
+    if (!timeStrWithOffset) return null;
+    const match = timeStrWithOffset.match(/^(\d{2})(\d{2})L(?:\+(\d))?$/);
+    if (!match) return null;
+
+    const hh = parseInt(match[1], 10);
+    const mm = parseInt(match[2], 10);
+    const plusDays = match[3] ? parseInt(match[3], 10) : 0;
+
+    const ap = AIRPORT_DB[airportCode] || { offset: 8, city: airportCode, en: airportCode };
+    const utcMs = Date.UTC(
+      baseDateObj.getFullYear(),
+      baseDateObj.getMonth(),
+      baseDateObj.getDate() + plusDays,
+      hh - ap.offset,
+      mm
+    );
+    const hktDate = new Date(utcMs + 8 * 3600 * 1000);
+    const d = String(hktDate.getUTCDate()).padStart(2, "0");
+    const mmm = MONTHS_EN[hktDate.getUTCMonth()].toUpperCase();
+    const h = String(hktDate.getUTCHours()).padStart(2, "0");
+    const min = String(hktDate.getUTCMinutes()).padStart(2, "0");
+    const wkZh = WEEKDAYS_ZH[hktDate.getUTCDay()];
+    const wkEn = WEEKDAYS_EN[hktDate.getUTCDay()];
+
+    return {
+      utcMs,
+      hktYear: hktDate.getUTCFullYear(),
+      hktMonth: hktDate.getUTCMonth(),
+      hktDay: hktDate.getUTCDate(),
+      dateLabel: `${d} ${mmm}`,
+      timeLabel: `${h}:${min}`,
+      fullDisplayZh: `${d} ${mmm} (${wkZh}) ${h}:${min} HKT`,
+      fullDisplayEn: `${d} ${mmm} (${wkEn}) ${h}:${min} HKT`
+    };
+  }
+
+  /* OCR 常見時間錯字自動糾正（例如 19451 -> 1945L） */
+  function normalizeOcrTimeLine(str) {
+    return str.replace(/\b(\d{4})[1Il\]\)](\+\d)?\b/g, "$1L$2");
+  }
+
+  function parseRosterText(raw) {
+    const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+    const parsedMap = new Map();
+    const monthFreq = {};
+
+    let detectedHeaderMonth = null;
+    for (let i = 0; i < Math.min(lines.length, 6); i++) {
+      const hdrMatch = lines[i].match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{2})\s+Roster/i);
+      if (hdrMatch) {
+        const mKey = hdrMatch[1].charAt(0).toUpperCase() + hdrMatch[1].slice(1, 3).toLowerCase();
+        detectedHeaderMonth = {
+          year: 2000 + parseInt(hdrMatch[2], 10),
+          month: MONTHS_MAP[mKey]
+        };
+        break;
+      }
+    }
+
+    for (const line of lines) {
+      if (line.includes("Roster of") || line.includes("Total Blocked")) continue;
+
+      const dateMatch = line.match(/^(\d{2}-[A-Za-z]{3}-\d{2})\s+([MTWFS])(.*)$/i);
+      if (!dateMatch) continue;
+
+      const dateStr = dateMatch[1];
+      let rest = normalizeOcrTimeLine(dateMatch[3].trim().replace(/\s+\)\s+/g, " "));
+      const dateObj = parseDateStr(dateStr);
+      if (isNaN(dateObj.getTime())) continue;
+
+      const ymKey = `${dateObj.getFullYear()}-${dateObj.getMonth()}`;
+      monthFreq[ymKey] = (monthFreq[ymKey] || 0) + 1;
+
+      const key = dateObj.getTime();
+      parsedMap.set(key, { dateStr: formatDateInputKey(dateObj), rest, dateObj, autoFilled: false });
+    }
+
+    if (parsedMap.size === 0) return [];
+
+    if (detectedHeaderMonth) {
+      headerMonthInfo = detectedHeaderMonth;
+    } else {
+      const topYm = Object.keys(monthFreq).sort((a, b) => monthFreq[b] - monthFreq[a])[0];
+      const [y, m] = topYm.split("-").map(Number);
+      headerMonthInfo = { year: y, month: m };
+    }
+
+    const { year, month } = headerMonthInfo;
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dObj = new Date(year, month, d);
+      const key = dObj.getTime();
+      if (!parsedMap.has(key)) {
+        parsedMap.set(key, {
+          dateStr: formatDateInputKey(dObj),
+          rest: "",
+          dateObj: dObj,
+          autoFilled: true
+        });
+      }
+    }
+
+    const sortedEntries = Array.from(parsedMap.values()).sort((a, b) => a.dateObj - b.dateObj);
+
+    const records = [];
+    let currentLocation = null;
+    let currentTripId = 0;
+
+    for (const entry of sortedEntries) {
+      const { dateStr, rest, dateObj, autoFilled } = entry;
+      const weekdayIdx = dateObj.getDay();
+      const isPrevMonth = (dateObj.getFullYear() !== year || dateObj.getMonth() !== month);
+
+      const flightMatch = rest.match(/^(\d{3,4})\s+([A-Z]{3})\s+([A-Z]{3})\s+([^\s]+)\s+(\d{4}L(?:\+\d)?)\s+(\d{4}L(?:\+\d)?)\s+(\d{4}L(?:\+\d)?)\s+(\d{4}L(?:\+\d)?)\s+(\d+:\d{2})\s+(\d+:\d{2})/);
+      const dutyCodeMatch = rest.match(/^(ASBY|HSBY|SBY|TRG|SEP|CRM|SIM|MED|AL|SL|DO|OFF|G)\b(?:\s+(\d{4}L)\s+(\d{4}L))?/i);
+
+      if (flightMatch) {
+        let [, flightNo, origin, dest, rawAcType, dutyStart, depTime, arrTime, dutyEnd, dutyPeriod, blockHours] = flightMatch;
+        let acType = rawAcType.replace(/[^A-Z0-9]/gi, "").toUpperCase();
+        if (acType === "33") acType = "33J";
+        if (acType === "35") acType = "35J";
+        if (acType === "77") acType = "77K";
+
+        if (origin === "HKG" || currentTripId === 0) {
+          currentTripId++;
+        }
+        const depHKT = convertToHKT(dateObj, depTime, origin);
+        const arrHKT = convertToHKT(dateObj, arrTime, dest);
+        const dutyStartHKT = convertToHKT(dateObj, dutyStart, origin);
+        const dutyEndHKT = convertToHKT(dateObj, dutyEnd, dest);
+
+        records.push({
+          type: "FLIGHT",
+          tripId: currentTripId,
+          isPrevMonth,
+          autoFilled,
+          dateStr,
+          dateObj,
+          weekdayZh: WEEKDAYS_ZH[weekdayIdx],
+          weekdayEn: WEEKDAYS_EN[weekdayIdx],
+          flightNo: `CX${flightNo}`,
+          rawFlightNo: flightNo,
+          origin,
+          dest,
+          acType,
+          acFull: AIRCRAFT_MAP[acType] || acType,
+          dutyStart,
+          depTime,
+          arrTime,
+          dutyEnd,
+          dutyPeriod,
+          blockHours,
+          depHKT,
+          arrHKT,
+          dutyStartHKT,
+          dutyEndHKT
+        });
+        currentLocation = dest;
+      } else if (dutyCodeMatch) {
+        const code = dutyCodeMatch[1].toUpperCase();
+        const startTime = dutyCodeMatch[2] || "";
+        const endTime = dutyCodeMatch[3] || "";
+        const meta = DUTY_CODE_INFO[code] || { category: "OFF", en: code, zh: code, descZh: "", descEn: "" };
+
+        records.push({
+          type: meta.category,
+          tripId: null,
+          isPrevMonth,
+          autoFilled,
+          code,
+          dutyMeta: meta,
+          startTime,
+          endTime,
+          dateStr,
+          dateObj,
+          weekdayZh: WEEKDAYS_ZH[weekdayIdx],
+          weekdayEn: WEEKDAYS_EN[weekdayIdx],
+          location: "HKG"
+        });
+        currentLocation = "HKG";
+      } else {
+        const isLayover = currentLocation && currentLocation !== "HKG";
+        records.push({
+          type: isLayover ? "LAYOVER" : "REST",
+          tripId: isLayover ? currentTripId : null,
+          isPrevMonth,
+          autoFilled,
+          dateStr,
+          dateObj,
+          weekdayZh: WEEKDAYS_ZH[weekdayIdx],
+          weekdayEn: WEEKDAYS_EN[weekdayIdx],
+          location: currentLocation || "HKG"
+        });
+      }
+    }
+
+    /* 第二輪：標記長途返港跨日飛行及抵港日為 TRANSIT（淺薄荷綠） */
+    records.forEach((rec) => {
+      if (rec.type === "FLIGHT" && rec.dest === "HKG" && rec.arrHKT) {
+        const depDateStart = new Date(rec.dateObj.getFullYear(), rec.dateObj.getMonth(), rec.dateObj.getDate());
+        const arrHktDateEnd = new Date(rec.arrHKT.hktYear, rec.arrHKT.hktMonth, rec.arrHKT.hktDay);
+
+        records.forEach(targetRec => {
+          if (targetRec.type === "REST") {
+            const tDate = new Date(targetRec.dateObj.getFullYear(), targetRec.dateObj.getMonth(), targetRec.dateObj.getDate());
+            if (tDate > depDateStart && tDate <= arrHktDateEnd) {
+              targetRec.type = "TRANSIT";
+              targetRec.tripId = rec.tripId;
+              targetRec.transitFlight = rec;
+              targetRec.isArrivalDay = (tDate.getTime() === arrHktDateEnd.getTime());
+            }
+          }
+        });
+      }
+    });
+
+    return records;
+  }
+
+  function previewTableFromText() {
+    const inputEl = document.getElementById("rawTextInput");
+    const wrap = document.getElementById("excelPreviewWrap");
+    if (!inputEl || !wrap) return;
+
+    const previewData = parseRosterText(inputEl.value);
+    if (previewData.length === 0) {
+      wrap.innerHTML = `<div style="padding:10px; font-size:11px; color:var(--text-secondary);">No valid roster lines detected yet.</div>`;
+      return;
+    }
+
+    let html = `<table class="excel-table">
+      <thead><tr><th>DATE</th><th>DUTY</th><th>SECTOR</th><th>AC</th><th>DEP</th><th>ARR</th></tr></thead><tbody>`;
+
+    previewData.forEach(r => {
+      const rowCls = r.autoFilled ? `class="auto-filled"` : "";
+      if (r.type === "FLIGHT") {
+        html += `<tr ${rowCls}><td>${r.dateStr}</td><td>${r.flightNo}</td><td>${r.origin}-${r.dest}</td><td>${r.acType}</td><td>${r.depTime}</td><td>${r.arrTime}</td></tr>`;
+      } else if (r.type === "TRANSIT") {
+        const lbl = r.isArrivalDay ? `${r.transitFlight.flightNo} ARR` : `${r.transitFlight.flightNo} FLY`;
+        html += `<tr ${rowCls}><td>${r.dateStr}</td><td>${lbl}</td><td>HKG</td><td>-</td><td>-</td><td>${r.transitFlight.arrHKT.timeLabel} HKT</td></tr>`;
+      } else if (r.type === "LAYOVER") {
+        html += `<tr ${rowCls}><td>${r.dateStr}</td><td>LAYOVER</td><td>${r.location}</td><td>-</td><td>-</td><td>-</td></tr>`;
+      } else if (r.type === "STANDBY" || r.type === "TRAINING") {
+        html += `<tr ${rowCls}><td>${r.dateStr}</td><td>${r.code}</td><td>HKG</td><td>-</td><td>${r.startTime || "-"}</td><td>${r.endTime || "-"}</td></tr>`;
+      } else {
+        const tag = r.autoFilled ? `${r.code || "REST"} (Auto)` : (r.code || "REST");
+        html += `<tr ${rowCls}><td>${r.dateStr}</td><td>${tag}</td><td>HKG</td><td>-</td><td>-</td><td>-</td></tr>`;
+      }
+    });
+
+    html += `</tbody></table>`;
+    wrap.innerHTML = html;
+  }
+
+  function renderAll() {
+    updateStaticLabels();
+    updateMonthNavButtons();
+    renderStats();
+    refreshLiveProgress();
+    renderCalendar();
+  }
+
+  function renderStats() {
+    let totalMins = 0;
+    let workDays = 0;
+    let offDays = 0;
+
+    currentRoster.forEach(item => {
+      if (item.isPrevMonth) return;
+      if (item.type === "FLIGHT") {
+        workDays++;
+        const [h, m] = item.blockHours.split(":").map(Number);
+        totalMins += h * 60 + m;
+      } else if (["LAYOVER", "TRANSIT", "STANDBY", "TRAINING"].includes(item.type)) {
+        workDays++;
+      } else {
+        offDays++;
+      }
+    });
+
+    const totalH = Math.floor(totalMins / 60);
+    const remM = String(totalMins % 60).padStart(2, "0");
+    const isCrew = viewMode === "crew";
+
+    setText("statBlockHours", isCrew ? `${totalH}:${remM}` : `${totalH} 小時`);
+    setText("statWorkDays", isCrew ? `${workDays}d` : `${workDays} 日`);
+    setText("statOffDays", isCrew ? `${offDays}d` : `${offDays} 日`);
+  }
+
+  function refreshLiveProgress() {
+    const flights = currentRoster.filter(r => r.type === "FLIGHT" && r.depHKT && r.arrHKT);
+    if (flights.length === 0) return;
+
+    const isCrew = viewMode === "crew";
+    const nowMs = Date.now();
+    let targetFlight = flights.find(f => nowMs < f.arrHKT.utcMs) || flights[flights.length - 1];
+
+    const originAp = AIRPORT_DB[targetFlight.origin] || { city: targetFlight.origin, en: targetFlight.origin };
+    const destAp = AIRPORT_DB[targetFlight.dest] || { city: targetFlight.dest, en: targetFlight.dest };
+
+    setText("heroAcType", targetFlight.acFull);
+    setText("heroRoute", isCrew
+      ? `${targetFlight.flightNo}  ${targetFlight.origin} ➔ ${targetFlight.dest}`
+      : `${targetFlight.flightNo}  ${originAp.city} (${targetFlight.origin}) ➔ ${destAp.city} (${targetFlight.dest})`);
+
+    const radarEl = document.getElementById("heroRadarLink");
+    if (radarEl) {
+      radarEl.href = `https://www.flightradar24.com/data/flights/cx${parseInt(targetFlight.rawFlightNo, 10)}`;
+    }
+
+    const depMs = targetFlight.depHKT.utcMs;
+    const arrMs = targetFlight.arrHKT.utcMs;
+    const barEl = document.getElementById("heroProgressBar");
+
+    if (nowMs >= depMs && nowMs <= arrMs) {
+      const pct = Math.min(99, Math.max(1, Math.round(((nowMs - depMs) / (arrMs - depMs)) * 100)));
+      const remMins = Math.max(1, Math.round((arrMs - nowMs) / 60000));
+      const remH = Math.floor(remMins / 60);
+      const remM = remMins % 60;
+
+      setText("heroStatusTag", isCrew ? `IN FLIGHT • ${pct}%` : `飛行中 • 進度 ${pct}%`);
+      setText("heroCountdown", isCrew
+        ? `ETA ${destAp.en} in ${remH}h ${remM}m`
+        : `高空飛行中 • 約 ${remH} 小時 ${remM} 分鐘後抵達${destAp.city}`);
+      if (barEl) barEl.style.width = `${pct}%`;
+    } else if (nowMs < depMs) {
+      const diffMins = Math.max(1, Math.round((depMs - nowMs) / 60000));
+      const days = Math.floor(diffMins / 1440);
+      const hrs = Math.floor((diffMins % 1440) / 60);
+      const mins = diffMins % 60;
+      const countdownEn = days > 0 ? `${days}d ${hrs}h ${mins}m` : `${hrs}h ${mins}m`;
+      const countdownZh = days > 0 ? `${days} 日 ${hrs} 小時 ${mins} 分鐘` : `${hrs} 小時 ${mins} 分鐘`;
+
+      setText("heroStatusTag", isCrew ? "UPCOMING • 0%" : "尚未起飛 • 0%");
+      setText("heroCountdown", isCrew
+        ? `DEP in ${countdownEn} • Report ${targetFlight.dutyStart}`
+        : `距離香港時間起飛仲有 ${countdownZh}`);
+      if (barEl) barEl.style.width = "0%";
+    } else {
+      setText("heroStatusTag", isCrew ? "COMPLETED • 100%" : "已完成 • 100%");
+      setText("heroCountdown", isCrew
+        ? "All scheduled flights completed"
+        : "本月排班航班已全部順利抵港");
+      if (barEl) barEl.style.width = "100%";
+    }
+
+    setText("heroLeftMeta", isCrew
+      ? `DEP: ${targetFlight.depTime} (${targetFlight.depHKT.timeLabel} HKT)`
+      : `起飛: ${targetFlight.depHKT.fullDisplayZh}`);
+    setText("heroRightMeta", isCrew
+      ? `ARR: ${targetFlight.arrTime} (${targetFlight.arrHKT.timeLabel} HKT)`
+      : `抵${destAp.city}: ${targetFlight.arrHKT.fullDisplayZh}`);
+  }
+
+  function renderCalendar() {
+    const grid = document.getElementById("calendarGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+    if (currentRoster.length === 0) return;
+
+    const isCrew = viewMode === "crew";
+    const { year, month } = headerMonthInfo;
+
+    setText("rosterSubtitle", `${MONTHS_EN[month]} ${year}`);
+    setText("listTitle", isCrew
+      ? `${MONTHS_EN[month]} ${year}`
+      : `${year}年${month + 1}月`);
+
+    const now = new Date();
+    const todayY = now.getFullYear();
+    const todayM = now.getMonth();
+    const todayD = now.getDate();
+
+    const firstItemWeekday = currentRoster[0].dateObj.getDay();
+    for (let i = 0; i < firstItemWeekday; i++) {
+      const emptyCell = document.createElement("div");
+      emptyCell.className = "cal-cell empty";
+      grid.appendChild(emptyCell);
+    }
+
+    currentRoster.forEach((item, idx) => {
+      const cell = document.createElement("div");
+      const dObj = item.dateObj;
+      const dayNum = dObj.getDate();
+      const isToday = (dObj.getFullYear() === todayY && dObj.getMonth() === todayM && dayNum === todayD);
+      const todayHtml = isToday ? `<span class="today-tag">TODAY</span>` : "";
+      const prevMonTag = item.isPrevMonth ? `<span style="font-size:8px;opacity:0.85;">${MONTHS_EN[dObj.getMonth()].toUpperCase()}</span>` : "";
+      const prevCls = item.isPrevMonth ? "prev-month-day" : "";
+
+      if (item.type === "FLIGHT") {
+        cell.className = `cal-cell work-flight ${prevCls} ${isToday ? "is-today" : ""}`;
+        const destCity = (AIRPORT_DB[item.dest] || { city: item.dest }).city;
+        const badgeText = isCrew ? item.flightNo : `${item.origin}➔${item.dest}`;
+        const subText = isCrew ? `${item.origin}-${item.dest}` : `抵${destCity}`;
+
+        cell.innerHTML = `
+          <div class="cal-day-num">${dayNum}${prevMonTag}${todayHtml}</div>
+          <div class="cal-badge">${badgeText}</div>
+          <div class="cal-sub">${subText}</div>
+        `;
+      } else if (item.type === "TRANSIT") {
+        cell.className = `cal-cell work-transit ${prevCls} ${isToday ? "is-today" : ""}`;
+        const tf = item.transitFlight;
+        const badgeText = item.isArrivalDay
+          ? (isCrew ? `${tf.flightNo} ARR` : "抵港 HKG")
+          : (isCrew ? `${tf.flightNo}` : "飛行中");
+        const subText = item.isArrivalDay
+          ? `${tf.arrHKT.timeLabel} HKT`
+          : (isCrew ? "In-Transit" : `${tf.origin}➔HKG`);
+
+        cell.innerHTML = `
+          <div class="cal-day-num">${dayNum}${prevMonTag}${todayHtml}</div>
+          <div class="cal-badge">${badgeText}</div>
+          <div class="cal-sub">${subText}</div>
+        `;
+      } else if (item.type === "LAYOVER") {
+        cell.className = `cal-cell work-layover ${prevCls} ${isToday ? "is-today" : ""}`;
+        const locCity = (AIRPORT_DB[item.location] || { city: item.location }).city;
+        cell.innerHTML = `
+          <div class="cal-day-num">${dayNum}${prevMonTag}${todayHtml}</div>
+          <div class="cal-badge" style="color:var(--cx-gold);">${item.location}</div>
+          <div class="cal-sub">${isCrew ? "Layover" : locCity + "外站"}</div>
+        `;
+      } else if (item.type === "STANDBY") {
+        cell.className = `cal-cell work-standby ${prevCls} ${isToday ? "is-today" : ""}`;
+        const badgeText = isCrew ? item.code : (item.dutyMeta ? item.dutyMeta.zh : "待命");
+        const subText = item.startTime ? item.startTime.slice(0, 4) : "HKG";
+        cell.innerHTML = `
+          <div class="cal-day-num">${dayNum}${prevMonTag}${todayHtml}</div>
+          <div class="cal-badge">${badgeText}</div>
+          <div class="cal-sub">${subText}</div>
+        `;
+      } else if (item.type === "TRAINING") {
+        cell.className = `cal-cell work-training ${prevCls} ${isToday ? "is-today" : ""}`;
+        const badgeText = isCrew ? item.code : (item.dutyMeta ? item.dutyMeta.zh : "培訓");
+        const subText = item.startTime ? item.startTime.slice(0, 4) : "CX City";
+        cell.innerHTML = `
+          <div class="cal-day-num">${dayNum}${prevMonTag}${todayHtml}</div>
+          <div class="cal-badge">${badgeText}</div>
+          <div class="cal-sub">${subText}</div>
+        `;
+      } else {
+        cell.className = `cal-cell day-off ${prevCls} ${isToday ? "is-today" : ""}`;
+        const meta = item.dutyMeta;
+        const codeLabel = isCrew
+          ? (item.code || "OFF")
+          : (meta ? meta.zh : "休息");
+        cell.innerHTML = `
+          <div class="cal-day-num">${dayNum}${prevMonTag}${todayHtml}</div>
+          <div class="cal-badge" style="color:var(--text-secondary);">${codeLabel}</div>
+          <div class="cal-sub">${isCrew ? "HKG" : "在港"}</div>
+        `;
+      }
+
+      cell.onclick = () => openDayDetail(idx);
+      grid.appendChild(cell);
+    });
+  }
+
+  function wmoWeatherInfo(code, isCrew) {
+    if (code === 0) return { icon: "☀️", desc: isCrew ? "Clear" : "晴朗" };
+    if (code <= 3) return { icon: "⛅", desc: isCrew ? "Cloudy" : "多雲" };
+    if (code <= 48) return { icon: "🌫️", desc: isCrew ? "Fog" : "有霧" };
+    if (code <= 57) return { icon: "🌦️", desc: isCrew ? "Drizzle" : "微雨" };
+    if (code <= 67) return { icon: "🌧️", desc: isCrew ? "Rain" : "有雨" };
+    if (code <= 77) return { icon: "❄️", desc: isCrew ? "Snow" : "降雪" };
+    if (code <= 82) return { icon: "🌦️", desc: isCrew ? "Showers" : "陣雨" };
+    if (code <= 86) return { icon: "🌨️", desc: isCrew ? "Snow Shwr" : "陣雪" };
+    return { icon: "⛈️", desc: isCrew ? "T-Storm" : "雷暴" };
+  }
+
+  async function loadDestinationWeather(airportCode, containerId) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    const isCrew = viewMode === "crew";
+    const ap = AIRPORT_DB[airportCode];
+    if (!ap || ap.lat === undefined) {
+      el.innerHTML = `<div style="font-size:11px; color:var(--text-secondary);">${isCrew ? "WMO station coordinates unavailable." : "暫無此機場之 WMO 氣象站座標資料"}</div>`;
+      return;
+    }
+
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${ap.lat}&longitude=${ap.lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&models=best_match&timezone=auto`;
+      const res = await fetch(url);
+      const data = await res.json();
+      const daily = data.daily;
+      if (!daily || !daily.time) throw new Error("No daily data");
+
+      let stripHtml = `<div class="weather-strip">`;
+      for (let i = 0; i < Math.min(7, daily.time.length); i++) {
+        const dt = daily.time[i].slice(5);
+        const wmo = wmoWeatherInfo(daily.weather_code[i], isCrew);
+        const tmax = Math.round(daily.temperature_2m_max[i]);
+        const tmin = Math.round(daily.temperature_2m_min[i]);
+        const pop = daily.precipitation_probability_max ? daily.precipitation_probability_max[i] : null;
+        const popHtml = (pop !== null && pop !== undefined) ? `<div class="weather-pop">💧${pop}%</div>` : "";
+
+        stripHtml += `
+          <div class="weather-day-box">
+            <div style="color:var(--text-secondary); font-weight:600;">${dt}</div>
+            <div style="font-size:15px; margin:2px 0;" title="${wmo.desc}">${wmo.icon}</div>
+            <strong>${tmax}°</strong>
+            <div style="color:var(--text-secondary);">${tmin}°</div>
+            ${popHtml}
+          </div>
+        `;
+      }
+      stripHtml += `</div>`;
+      el.innerHTML = stripHtml;
+    } catch (e) {
+      el.innerHTML = `<div style="font-size:11px; color:var(--text-secondary);">${isCrew ? "Unable to fetch WMO forecast (offline)." : "無法連線取得 WMO 氣象預報（離線狀態）"}</div>`;
+    }
+  }
+
+  /* 計算當地即時時鐘字串 */
+  function getFormattedLocalTime(ap) {
+    try {
+      if (ap && ap.tz) {
+        return new Intl.DateTimeFormat("en-GB", {
+          timeZone: ap.tz,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false
+        }).format(new Date());
+      }
+    } catch (e) {}
+    const offset = (ap && typeof ap.offset === "number") ? ap.offset : 8;
+    const d = new Date(Date.now() + offset * 3600 * 1000);
+    return `${String(d.getUTCHours()).padStart(2, "0")}:${String(d.getUTCMinutes()).padStart(2, "0")}:${String(d.getUTCSeconds()).padStart(2, "0")}`;
+  }
+
+  function startLayoverClock(airportCode, reportUtcMs) {
+    if (liveClockTimer) clearInterval(liveClockTimer);
+    const ap = AIRPORT_DB[airportCode] || { offset: 8 };
+    const isCrew = viewMode === "crew";
+
+    const tick = () => {
+      const clockEl = document.getElementById("layoverLiveClock");
+      const countEl = document.getElementById("layoverReportCountdown");
+      if (!clockEl) {
+        clearInterval(liveClockTimer);
+        return;
+      }
+      clockEl.textContent = `${getFormattedLocalTime(ap)} L`;
+
+      if (countEl && reportUtcMs) {
+        const diffMs = reportUtcMs - Date.now();
+        if (diffMs > 0) {
+          const totalMins = Math.floor(diffMs / 60000);
+          const hrs = Math.floor(totalMins / 60);
+          const mins = totalMins % 60;
+          countEl.textContent = isCrew ? `in ${hrs}h ${mins}m` : `${hrs} 小時 ${mins} 分鐘後`;
+        } else {
+          countEl.textContent = isCrew ? "Reported / Departed" : "已報到 / 啟程";
+        }
+      }
+    };
+
+    tick();
+    liveClockTimer = setInterval(tick, 1000);
+  }
+
+  function openDayDetail(idx) {
+    if (liveClockTimer) clearInterval(liveClockTimer);
+
+    const clickedItem = currentRoster[idx];
+    const isCrew = viewMode === "crew";
+    const modal = document.getElementById("dayDetailModal");
+    const titleEl = document.getElementById("detailModalTitle");
+    const bodyEl = document.getElementById("detailModalBody");
+
+    const wkStr = isCrew ? clickedItem.weekdayEn : clickedItem.weekdayZh;
+    titleEl.textContent = isCrew
+      ? `${formatShortDate(clickedItem.dateObj)} (${wkStr})`
+      : `${formatShortDate(clickedItem.dateObj)} (${wkStr}) 排班詳情`;
+
+    let targetAirportCode = "HKG";
+    if (clickedItem.type === "FLIGHT") {
+      targetAirportCode = clickedItem.dest !== "HKG" ? clickedItem.dest : clickedItem.origin;
+    } else if (clickedItem.type === "LAYOVER") {
+      targetAirportCode = clickedItem.location;
+    } else if (clickedItem.type === "TRANSIT") {
+      targetAirportCode = "HKG";
+    }
+
+    const knownAp = AIRPORT_DB[targetAirportCode];
+    const targetAp = knownAp || {
+      city: targetAirportCode, en: targetAirportCode, countryCode: "GENERAL", fullCountryZh: `航點 (${targetAirportCode})`
+    };
+    const isoStationCode = knownAp ? `${targetAp.countryCode}${targetAirportCode}` : targetAirportCode;
+    const customs = CUSTOMS_RULES[targetAp.countryCode] || CUSTOMS_RULES.GENERAL;
+
+    let html = "";
+    let layoverNextReportUtcMs = null;
+
+    if (clickedItem.tripId) {
+      const tripDays = currentRoster.filter(r => r.tripId === clickedItem.tripId);
+      const firstDay = tripDays[0];
+      const lastDay = tripDays[tripDays.length - 1];
+      const returnFlight = [...tripDays].reverse().find(r => r.type === "FLIGHT");
+
+      /* 計算外站最低休息時間（由去程落地 ARR 至回程報到 Duty Start） */
+      const outboundFlight = tripDays.find(r => r.type === "FLIGHT" && r.dest !== "HKG");
+      const inboundFlight = tripDays.find(r => r.type === "FLIGHT" && r.origin !== "HKG");
+      let restDurationStr = "--";
+      if (outboundFlight && inboundFlight && outboundFlight.arrHKT && inboundFlight.dutyStartHKT) {
+        layoverNextReportUtcMs = inboundFlight.dutyStartHKT.utcMs;
+        const restMins = Math.max(0, Math.round((inboundFlight.dutyStartHKT.utcMs - outboundFlight.arrHKT.utcMs) / 60000));
+        const rH = Math.floor(restMins / 60);
+        const rM = String(restMins % 60).padStart(2, "0");
+        restDurationStr = isCrew ? `${rH}h ${rM}m` : `${rH} 小時 ${rM} 分`;
+      }
+
+      const hktReturnStr = returnFlight && returnFlight.arrHKT
+        ? (isCrew
+            ? `HKG Arr: ${returnFlight.arrHKT.dateLabel} ${returnFlight.arrHKT.timeLabel} HKT`
+            : `香港時間 ${returnFlight.arrHKT.dateLabel} ${returnFlight.arrHKT.timeLabel} 抵港`)
+        : "";
+
+      html += `
+        <div class="trip-banner">
+          <div class="trip-banner-title">${isCrew ? "Pairing" : "更期區間"}: ${formatShortDate(firstDay.dateObj)} – ${formatShortDate(lastDay.dateObj)}</div>
+          <div class="trip-banner-sub">${hktReturnStr} • ${isCrew ? `${tripDays.length}d Trip` : `共 ${tripDays.length} 日執勤更期`}</div>
+        </div>
+      `;
+
+      /* 如果係外站（非 HKG），顯示「外站當地即時時鐘」及「最低休息時間 (Min Rest)」 */
+      if (targetAirportCode !== "HKG") {
+        html += `
+          <div class="layover-live-box">
+            <div class="layover-live-item">
+              <span>${isCrew ? `Local Time (${targetAirportCode})` : `${targetAp.city}當地現在時間`}</span>
+              <strong id="layoverLiveClock">--:--:--</strong>
+            </div>
+            <div class="layover-live-item">
+              <span>${isCrew ? "Layover Rest / Next Report" : "外站總休息時間 (Min Rest)"}</span>
+              <strong>${restDurationStr}</strong>
+              <div style="font-size:10.5px; color:#A8E0DC; margin-top:2px;">${isCrew ? "Report: " : "回程報到: "}<b id="layoverReportCountdown">--</b></div>
+            </div>
+          </div>
+        `;
+      }
+
+      tripDays.forEach(d => {
+        const isSelected = d.dateStr === clickedItem.dateStr;
+        const dWk = isCrew ? d.weekdayEn : d.weekdayZh;
+
+        if (d.type === "FLIGHT") {
+          const originAp = AIRPORT_DB[d.origin] || { city: d.origin, en: d.origin, countryCode: "", fullCountryZh: d.origin };
+          const destAp = AIRPORT_DB[d.dest] || { city: d.dest, en: d.dest, countryCode: "", fullCountryZh: d.dest };
+
+          const stationCodeTag = d.dest !== "HKG"
+            ? `${destAp.countryCode}${d.dest} • ${destAp.fullCountryZh}`
+            : `${originAp.countryCode}${d.origin} • ${originAp.fullCountryZh}`;
+
+          const routeTitle = isCrew
+            ? `${d.origin} ➔ ${d.dest}`
+            : `${originAp.fullCountryZh} (${d.origin}) ➔ ${destAp.fullCountryZh} (${d.dest})`;
+
+          const dutyStartDisplay = isCrew
+            ? `${d.dutyStart} (${d.dutyStartHKT.dateLabel} ${d.dutyStartHKT.timeLabel} HKT)`
+            : `${d.dutyStart} (${d.dutyStartHKT.fullDisplayZh})`;
+          const dutyEndDisplay = isCrew
+            ? `${d.dutyEnd} (${d.dutyEndHKT.dateLabel} ${d.dutyEndHKT.timeLabel} HKT)`
+            : `${d.dutyEnd} (${d.dutyEndHKT.fullDisplayZh})`;
+          const depDisplay = isCrew
+            ? `${d.depTime} (${d.depHKT.dateLabel} ${d.depHKT.timeLabel} HKT)`
+            : `${d.depTime} (${d.depHKT.fullDisplayZh})`;
+          const arrDisplay = isCrew
+            ? `${d.arrTime} (${d.arrHKT.dateLabel} ${d.arrHKT.timeLabel} HKT)`
+            : `${d.arrTime} (${d.arrHKT.fullDisplayZh})`;
+
+          html += `
+            <div class="detail-step ${isSelected ? "active-day" : ""}">
+              <div class="step-header">
+                <div>
+                  <div style="color:var(--cx-jade);">${formatShortDate(d.dateObj)} (${dWk}) • ${d.flightNo}</div>
+                  <div class="country-badge">${stationCodeTag}</div>
+                </div>
+                <div style="text-align:right;">${routeTitle}</div>
+              </div>
+              <div class="step-grid">
+                <div class="step-item"><span>${isCrew ? "Duty Start" : "Duty Start (報到)"}</span><strong>${dutyStartDisplay}</strong></div>
+                <div class="step-item"><span>${isCrew ? "Duty End" : "Duty End (結束)"}</span><strong>${dutyEndDisplay}</strong></div>
+                <div class="step-item"><span>${isCrew ? "DEP" : "DEP (起飛時間)"}</span><strong>${depDisplay}</strong></div>
+                <div class="step-item"><span>${isCrew ? "ARR" : "ARR (到達時間)"}</span><strong>${arrDisplay}</strong></div>
+                <div class="step-item"><span>${isCrew ? "Aircraft / Block" : "機型 / Block Hours"}</span><strong>${d.acFull}</strong> • ${d.blockHours}</div>
+                <div class="step-item"><span>${isCrew ? "Live Radar" : "實時雷達"}</span><a href="https://www.flightradar24.com/data/flights/cx${parseInt(d.rawFlightNo, 10)}" target="_blank" style="color:var(--cx-jade);font-weight:600;">Flightradar24 ↗</a></div>
+              </div>
+            </div>
+          `;
+        } else if (d.type === "TRANSIT") {
+          const tf = d.transitFlight;
+          const statusTitle = d.isArrivalDay
+            ? (isCrew ? `${tf.flightNo} Arrival Day (HKG)` : `${tf.flightNo} 香港時間抵港日`)
+            : (isCrew ? `${tf.flightNo} In-Transit Flight Day` : `${tf.flightNo} 跨日高空執勤中`);
+          const statusDesc = d.isArrivalDay
+            ? (isCrew ? `Scheduled arrival in HKG at ${tf.arrHKT.fullDisplayEn}` : `預計香港時間 ${tf.arrHKT.fullDisplayZh} 抵達香港國際機場`)
+            : (isCrew ? `En route from ${tf.origin} to HKG` : `正在由 ${tf.origin} 飛往香港途中`);
+
+          html += `
+            <div class="detail-step ${isSelected ? "active-day" : ""}">
+              <div class="step-header">
+                <div>
+                  <div style="color:var(--cx-jade);">${formatShortDate(d.dateObj)} (${dWk}) • ${statusTitle}</div>
+                  <div class="country-badge">HKHKG • 香港</div>
+                </div>
+                <span>${tf.origin} ➔ HKG</span>
+              </div>
+              <div style="font-size:12px; color:var(--text-secondary);">${statusDesc}</div>
+            </div>
+          `;
+        } else if (d.type === "LAYOVER") {
+          const locInfo = AIRPORT_DB[d.location] || { city: d.location, en: d.location, countryCode: "", fullCountryZh: d.location, offset: 8 };
+          const diff = locInfo.offset - 8;
+          const diffStr = isCrew
+            ? `UTC${locInfo.offset >= 0 ? "+" + locInfo.offset : locInfo.offset} (${diff >= 0 ? "+" + diff : diff}h vs HKG)`
+            : `當地時區 UTC${locInfo.offset >= 0 ? "+" + locInfo.offset : locInfo.offset}（${diff >= 0 ? `快香港 ${diff} 小時` : `慢香港 ${Math.abs(diff)} 小時`}）`;
+
+          html += `
+            <div class="detail-step ${isSelected ? "active-day" : ""}">
+              <div class="step-header">
+                <div>
+                  <div style="color:var(--cx-gold);">${formatShortDate(d.dateObj)} (${dWk}) • ${isCrew ? "Layover" : "外站停留"}</div>
+                  <div class="country-badge">${locInfo.countryCode}${d.location} • ${locInfo.fullCountryZh}</div>
+                </div>
+                <span>${isCrew ? `${locInfo.en} (${d.location})` : `${locInfo.city} (${d.location})`}</span>
+              </div>
+              <div style="font-size:12px; color:var(--text-secondary);">${diffStr}</div>
+            </div>
+          `;
+        }
+      });
+    } else {
+      const meta = clickedItem.dutyMeta || DUTY_CODE_INFO[clickedItem.code] || null;
+      const label = meta
+        ? (isCrew ? `${clickedItem.code} • ${meta.en}` : `${meta.zh} (${clickedItem.code})`)
+        : (isCrew ? "HKG Rest" : "在港休息日 (Rest Day)");
+      const subText = meta
+        ? (isCrew ? meta.descEn : meta.descZh)
+        : (isCrew ? "Base: HKG • No duty" : "當日無飛行執勤任務，身處基地香港 (HKG)。");
+      const timeBadge = (clickedItem.startTime && clickedItem.endTime)
+        ? `<div style="font-size:12px; font-weight:600; color:var(--cx-jade); margin-top:4px;">${isCrew ? "Time:" : "時間:"} ${clickedItem.startTime} – ${clickedItem.endTime}</div>`
+        : "";
+
+      html += `
+        <div class="detail-step active-day">
+          <div class="step-header">
+            <div>
+              <span>${formatShortDate(clickedItem.dateObj)} (${wkStr})</span>
+              <div><span class="country-badge">HKHKG • 香港</span></div>
+            </div>
+            <span style="color:var(--cx-jade);">${label}</span>
+          </div>
+          ${timeBadge}
+          <div style="font-size:12.5px; color:var(--text-secondary); margin-top:4px;">${subText}</div>
+        </div>
+      `;
+    }
+
+    const banItems = isCrew ? customs.banEn : customs.banZh;
+    const allowItems = isCrew ? customs.allowEn : customs.allowZh;
+    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(`${targetAp.en} ${targetAirportCode} customs prohibited allowed items`)}`;
+    const officialCustomsUrl = customs.officialUrl || "https://www.iatatravelcentre.com/";
+
+    html += `
+      <div class="info-section-card">
+        <div class="info-section-title">
+          <span>${isCrew ? `7-Day Weather • ${isoStationCode} (${targetAp.en})` : `當地 7 天天氣預報 • ${isoStationCode} (${targetAp.fullCountryZh})`}</span>
+          <span class="wmo-tag">WMO Standard</span>
+        </div>
+        <div id="weatherContainer"><div style="font-size:11px; color:var(--text-secondary);">Loading WMO forecast...</div></div>
+      </div>
+
+      <div class="info-section-card">
+        <div class="info-section-title">
+          <span>${isCrew ? `Customs Advisory • ${customs.countryEn}` : `當地海關入境重點 • ${customs.countryZh}`}</span>
+        </div>
+        <div class="customs-group">
+          <div class="customs-group-header ban">${isCrew ? "Prohibited / Restricted:" : "禁止 / 嚴格限制："}</div>
+          <ul class="customs-bullets">
+            ${banItems.map(item => `<li>- ${item}</li>`).join("")}
+          </ul>
+        </div>
+        <div class="customs-group">
+          <div class="customs-group-header allow">${isCrew ? "Allowed / Allowance:" : "可以攜帶 / 免稅額度："}</div>
+          <ul class="customs-bullets">
+            ${allowItems.map(item => `<li>- ${item}</li>`).join("")}
+          </ul>
+        </div>
+        <div class="customs-search-links">
+          <a class="customs-link-btn" href="${officialCustomsUrl}" target="_blank">${isCrew ? "Official Customs ↗" : "官方海關網站 ↗"}</a>
+          <a class="customs-link-btn" href="${googleSearchUrl}" target="_blank">${isCrew ? "Google Live Check ↗" : "Google 即時查詢 ↗"}</a>
+        </div>
+      </div>
+    `;
+
+    bodyEl.innerHTML = html;
+    modal.classList.add("open");
+    loadDestinationWeather(targetAirportCode, "weatherContainer");
+    if (targetAirportCode !== "HKG") {
+      startLayoverClock(targetAirportCode, layoverNextReportUtcMs);
+    }
+  }
+
+  function closeDayModal() {
+    if (liveClockTimer) clearInterval(liveClockTimer);
+    document.getElementById("dayDetailModal").classList.remove("open");
+  }
+
+  function loadScriptDynamic(src) {
+    return new Promise((resolve, reject) => {
+      if (document.querySelector(`script[src="${src}"]`)) return resolve();
+      const s = document.createElement("script");
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  async function exportFamilyImage() {
+    const prevMode = viewMode;
+    if (viewMode !== "family") setViewMode("family");
+    showToast("正在生成高清更表圖 (JPG)...");
+
+    try {
+      await loadScriptDynamic("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
+      await new Promise(r => setTimeout(r, 250));
+      const target = document.getElementById("captureArea");
+      const bgCol = getComputedStyle(document.body).getPropertyValue("--bg-page").trim() || "#F5F7F6";
+
+      const canvas = await window.html2canvas(target, {
+        scale: 2,
+        backgroundColor: bgCol,
+        useCORS: true
+      });
+
+      const fileName = `Pui-CX-Roster-${activeMonthKey}.jpg`;
+      const jpgDataUrl = canvas.toDataURL("image/jpeg", 0.95);
+
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", 0.95));
+      const file = new File([blob], fileName, { type: "image/jpeg" });
+
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: "Pui's CX Roster"
+          });
+          showToast("請在選單點擊「儲存影像」存入相簿");
+          return;
+        } catch (shareErr) {
+          if (shareErr.name === "AbortError") return;
+        }
+      }
+
+      const link = document.createElement("a");
+      link.download = fileName;
+      link.href = jpgDataUrl;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast("已匯出 JPG 更表圖片");
+    } catch (e) {
+      showToast("圖片生成失敗，請使用手機截圖");
+    } finally {
+      if (prevMode !== "family") setViewMode(prevMode);
+    }
+  }
+
+  function exportICS(isCancel = false) {
+    let icsLines = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Pui CX Roster//HK//EN",
+      "CALSCALE:GREGORIAN",
+      "X-WR-CALNAME:Pui's CX Roster",
+      "X-APPLE-CALENDAR-COLOR:#006564",
+      isCancel ? "METHOD:CANCEL" : "METHOD:PUBLISH"
+    ];
+
+    const formatICSUTC = (ms) => new Date(ms).toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+
+    currentRoster.forEach(item => {
+      const y = item.dateObj.getFullYear();
+      const m = String(item.dateObj.getMonth() + 1).padStart(2, "0");
+      const d = String(item.dateObj.getDate()).padStart(2, "0");
+      const uid = `pui-cx-roster-${y}${m}${d}@cxroster.local`;
+
+      if (item.type === "FLIGHT" && item.depHKT && item.arrHKT) {
+        const originCity = (AIRPORT_DB[item.origin] || { city: item.origin }).city;
+        const destCity = (AIRPORT_DB[item.dest] || { city: item.dest }).city;
+
+        icsLines.push("BEGIN:VEVENT");
+        icsLines.push(`UID:${uid}`);
+        icsLines.push(`SEQUENCE:${isCancel ? 2 : 1}`);
+        icsLines.push(`STATUS:${isCancel ? "CANCELLED" : "CONFIRMED"}`);
+        icsLines.push(`DTSTAMP:${formatICSUTC(Date.now())}`);
+        icsLines.push(`DTSTART:${formatICSUTC(item.depHKT.utcMs)}`);
+        icsLines.push(`DTEND:${formatICSUTC(item.arrHKT.utcMs)}`);
+        icsLines.push(`SUMMARY:${item.flightNo} ${originCity}(${item.origin}) ➔ ${destCity}(${item.dest})`);
+        icsLines.push(`DESCRIPTION:Duty Start: ${item.dutyStart} (${item.dutyStartHKT.fullDisplayEn})\\nDuty End: ${item.dutyEnd} (${item.dutyEndHKT.fullDisplayEn})\\nAircraft: ${item.acFull}\\nBlock: ${item.blockHours}`);
+        icsLines.push("END:VEVENT");
+      } else if (item.type === "LAYOVER") {
+        const locCity = (AIRPORT_DB[item.location] || { city: item.location }).city;
+        icsLines.push("BEGIN:VEVENT");
+        icsLines.push(`UID:${uid}`);
+        icsLines.push(`SEQUENCE:${isCancel ? 2 : 1}`);
+        icsLines.push(`STATUS:${isCancel ? "CANCELLED" : "CONFIRMED"}`);
+        icsLines.push(`DTSTAMP:${formatICSUTC(Date.now())}`);
+        icsLines.push(`DTSTART;VALUE=DATE:${y}${m}${d}`);
+        icsLines.push(`SUMMARY:Layover (${locCity} ${item.location})`);
+        icsLines.push("END:VEVENT");
+      } else if (item.type === "STANDBY" || item.type === "TRAINING") {
+        const meta = item.dutyMeta || { zh: item.code };
+        icsLines.push("BEGIN:VEVENT");
+        icsLines.push(`UID:${uid}`);
+        icsLines.push(`SEQUENCE:${isCancel ? 2 : 1}`);
+        icsLines.push(`STATUS:${isCancel ? "CANCELLED" : "CONFIRMED"}`);
+        icsLines.push(`DTSTAMP:${formatICSUTC(Date.now())}`);
+        icsLines.push(`DTSTART;VALUE=DATE:${y}${m}${d}`);
+        icsLines.push(`SUMMARY:CX ${item.code} (${meta.zh}) ${item.startTime ? item.startTime + "-" + item.endTime : ""}`);
+        icsLines.push("END:VEVENT");
+      }
+    });
+
+    icsLines.push("END:VCALENDAR");
+
+    const blob = new Blob([icsLines.join("\r\n")], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = isCancel ? "Puis-CX-Roster-CLEAR.ics" : "Puis-CX-Roster.ics";
+    a.click();
+    URL.revokeObjectURL(url);
+
+    showToast(isCancel ? "Clear .ics downloaded" : "已匯出日曆檔案 (.ics)");
+  }
+
+  function openImportModal() {
+    previewTableFromText();
+    document.getElementById("importModal").classList.add("open");
+  }
+
+  function closeImportModal() {
+    document.getElementById("importModal").classList.remove("open");
+  }
+
+  function loadSampleData() {
+    document.getElementById("rawTextInput").value = DEFAULT_ROSTER_TEXT;
+    previewTableFromText();
+    showToast("Demo sample loaded");
+  }
+
+  function parseAndRenderText() {
+    const raw = document.getElementById("rawTextInput").value;
+    const parsed = parseRosterText(raw);
+    if (parsed.length === 0) {
+      showToast("Invalid format. Check date format (e.g. 26-Nov-26)");
+      return;
+    }
+    currentRoster = parsed;
+    const ymKey = `${headerMonthInfo.year}-${String(headerMonthInfo.month + 1).padStart(2, "0")}`;
+    activeMonthKey = ymKey;
+    savedMonthsStore[ymKey] = raw;
+    saveMonthsStore();
+    safeStorage.set("pui_cx_active_ym", ymKey);
+    safeStorage.set("pui_cx_roster_final", raw);
+
+    renderAll();
+    closeImportModal();
+    showToast(`已更新 ${MONTHS_EN[headerMonthInfo.month]} ${headerMonthInfo.year} 更表`);
+  }
+
+  function preprocessImageForOCR(file) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        try {
+          const maxDim = 2200;
+          let scale = 1.6;
+          if (Math.max(img.width, img.height) * scale > maxDim) {
+            scale = maxDim / Math.max(img.width, img.height);
+          }
+
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.round(img.width * scale);
+          canvas.height = Math.round(img.height * scale);
+          const ctx = canvas.getContext("2d");
+          ctx.fillStyle = "#FFFFFF";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = imgData.data;
+          const w = canvas.width;
+          const h = canvas.height;
+
+          for (let y = 0; y < h; y++) {
+            let darkPixels = 0;
+            for (let x = 0; x < w; x++) {
+              const idx = (y * w + x) * 4;
+              const lum = 0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2];
+              if (lum < 185) darkPixels++;
+            }
+            if (darkPixels > w * 0.65) {
+              for (let x = 0; x < w; x++) {
+                const idx = (y * w + x) * 4;
+                data[idx] = 255;
+                data[idx + 1] = 255;
+                data[idx + 2] = 255;
+              }
+            }
+          }
+
+          for (let i = 0; i < data.length; i += 4) {
+            const lum = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+            const val = lum < 175 ? 0 : 255;
+            data[i] = val;
+            data[i + 1] = val;
+            data[i + 2] = val;
+          }
+
+          ctx.putImageData(imgData, 0, 0);
+          URL.revokeObjectURL(url);
+          resolve(canvas.toDataURL("image/png"));
+        } catch (err) {
+          URL.revokeObjectURL(url);
+          reject(err);
+        }
+      };
+      img.onerror = (err) => {
+        URL.revokeObjectURL(url);
+        reject(err);
+      };
+      img.src = url;
+    });
+  }
+
+  async function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const ext = (file.name.split(".").pop() || "").toLowerCase();
+    const textarea = document.getElementById("rawTextInput");
+    const dropTitle = document.getElementById("fileDropTitle");
+    const origDropText = dropTitle ? dropTitle.textContent : "";
+
+    try {
+      if (dropTitle) dropTitle.textContent = `讀取中：${file.name}...`;
+      showToast(`已選擇：${file.name}`);
+
+      if (ext === "csv" || ext === "txt") {
+        const text = await file.text();
+        textarea.value = text.replace(/,/g, " ");
+        previewTableFromText();
+        showToast("CSV 讀取完成，請按下方更新月曆");
+      } else if (ext === "pdf") {
+        showToast("正在解析 PDF...");
+        await loadScriptDynamic("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js");
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        let fullText = "";
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const content = await page.getTextContent();
+          fullText += content.items.map(item => item.str).join(" ") + "\n";
+        }
+        fullText = fullText.replace(/(\d{2}-[A-Za-z]{3}-\d{2})/g, "\n$1");
+        textarea.value = fullText.trim();
+        previewTableFromText();
+        showToast("PDF 讀取完成，請確認預覽表格");
+      } else if (file.type.startsWith("image/") || ["jpg", "jpeg", "png", "webp", "heic"].includes(ext)) {
+        showToast("正在辨識圖片文字 (OCR)...");
+        const cleanedDataUrl = await preprocessImageForOCR(file);
+        await loadScriptDynamic("https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js");
+        const worker = await window.Tesseract.createWorker("eng");
+        const ret = await worker.recognize(cleanedDataUrl);
+        await worker.terminate();
+        let cleanedText = ret.data.text.replace(/(\d{2}-[A-Za-z]{3}-\d{2})/g, "\n$1");
+        textarea.value = cleanedText.trim();
+        previewTableFromText();
+        showToast("OCR 完成，請檢查黃色自動補齊行");
+      } else {
+        showToast("唔支援此檔案格式，請揀 PDF / JPG / PNG / CSV");
+      }
+    } catch (err) {
+      showToast("讀取失敗：" + (err.message || "請重試"));
+    } finally {
+      if (dropTitle) dropTitle.textContent = origDropText;
+      event.target.value = "";
+    }
+  }
+</script>
+</body>
+</html>
